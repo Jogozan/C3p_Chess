@@ -5,10 +5,30 @@ Class {
 	#package : 'Myg-Chess-Core'
 }
 
+{ #category : 'as yet unclassified' }
+MyPawn >> canPromote [
+	^ (self isWhite and: [ square position y = 8 ]) or: [
+		  self isWhite not and: [ square position y = 1 ] ]
+]
+
 { #category : 'accessing' }
 MyPawn >> id [
 
 	^ 'P'
+]
+
+{ #category : 'as yet unclassified' }
+MyPawn >> promoteTo: aPieceClass [
+	| promotedPiece |
+	self canPromote ifFalse: [ ^ self ].
+
+	promotedPiece := aPieceClass new.
+	promotedPiece color: self color.
+	promotedPiece square: square.
+
+	square contents: promotedPiece.
+
+	^ promotedPiece
 ]
 
 { #category : 'rendering' }
