@@ -7,8 +7,8 @@ Class {
 
 { #category : 'as yet unclassified' }
 MyPawn >> canPromote [
-	^ (self isWhite and: [ square position y = 8 ]) or: [
-		  self isWhite not and: [ square position y = 1 ] ]
+	^ (self isWhite and: [ square name endsWith: '8' ]) or: [
+		  self isWhite not and: [ square name endsWith: '1' ] ]
 ]
 
 { #category : 'accessing' }
