@@ -103,6 +103,19 @@ MyChessSquare >> contents: aPiece [
 			 fontName: MyOpenChessDownloadedFont new familyName)
 ]
 
+{ #category : 'submorphs - add/remove' }
+MyChessSquare >> delete [
+
+	self border: Color red
+	
+]
+
+{ #category : 'deleting' }
+MyChessSquare >> deletePiece [
+	"More logic than game"
+	self contents: nil.
+]
+
 { #category : 'api - configuration' }
 MyChessSquare >> down [
 
@@ -291,6 +304,12 @@ MyChessSquare >> right [
 MyChessSquare >> select [
 	
 	self border: Color green
+]
+
+{ #category : 'initialization' }
+MyChessSquare >> selectEditor [
+	
+	self border: Color red
 ]
 
 { #category : 'highlighting' }

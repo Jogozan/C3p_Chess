@@ -15,6 +15,8 @@ Class {
 	#name : 'MyChessGame',
 	#superclass : 'BlElement',
 	#instVars : [
+		'piece',
+		'square',
 		'board',
 		'currentPlayer',
 		'whitePlayer',
@@ -49,11 +51,59 @@ MyChessGame class >> new [
 	self error: 'Please use one of the other constructors'
 ]
 
+{ #category : 'template' }
+MyChessGame >> activity: piece to: square [
+
+	"Pour executer le template -> faire appel des differentes methodes"
+	| x |
+	x := MyPiece new.
+	x legalTargetSquares.
+	self move: piece to: square.
+	self recordMovementOf: piece to: square.
+	self x
+]
+
 { #category : 'playing' }
 MyChessGame >> checkForMate [
 
 	whitePlayer king isCheckMated ifTrue: [ self halt: 'Black wins!' ].
 	blackPlayer king isCheckMated ifTrue: [ self halt: 'White wins!' ].
+]
+
+{ #category : 'accessing' }
+MyChessGame >> clickOnDelete [
+
+	Transcript show: 'iciiii'.
+	square border: Color red.
+	"square contents: nil"
+]
+
+{ #category : 'delete' }
+MyChessGame >> editor [
+
+	| buttonDelete buttonFinsish editorPane x |
+	buttonDelete := ToButton new.
+	buttonDelete labelText: 'Delete!'.
+	buttonFinsish := ToButton new.
+	buttonFinsish labelText: 'Finish!'.
+
+	editorPane := ToElement new.
+	editorPane constraintsDo: [ :c |
+		c vertical fitContent.
+		c horizontal matchParent ].
+	editorPane layout: BlLinearLayout vertical.
+	editorPane layout cellSpacing: 10.
+	editorPane margin: (BlInsets all: 20).
+	editorPane matchParent.
+
+	self addChild: editorPane.
+	editorPane addChild: buttonDelete.
+	editorPane addChild: buttonFinsish.
+	
+	x := MyChessSquare new.
+	x delete. 
+	buttonDelete whenClickedDo: [self clickOnDelete ].
+	^ self
 ]
 
 { #category : 'initialization' }
@@ -87,7 +137,7 @@ MyChessGame >> initializeFonts [
 { #category : 'initialization' }
 MyChessGame >> initializeFromFENGame: aFENGame [
 
-	| button infoPane |
+	| button buttonEditor infoPane |
 	aFENGame sideToMove = 'White'
 		ifTrue: [ currentPlayer := whitePlayer ]
 		ifFalse: [ currentPlayer := blackPlayer ].
@@ -98,7 +148,10 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	board game: self.
 	button := ToButton new.
 	button labelText: 'Play!'.
+	buttonEditor := ToButton new. 
+	buttonEditor labelText: 'Editor !'.
 	button whenClickedDo: [ self play ].
+	buttonEditor whenClickedDo: [ self editor ].
 	
 	infoPane := ToElement new.
 	infoPane constraintsDo: [ :c | 
@@ -116,6 +169,7 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	self addChild: infoPane.
 	infoPane addChild: movesLabel.
 	infoPane addChild: button.
+	infoPane addChild: buttonEditor. 
 
 	self layout: BlLinearLayout horizontal.
 	self constraintsDo: [ :aLayoutConstraints |
@@ -127,7 +181,8 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 MyChessGame >> move: piece to: square [
 
 	piece moveTo: square.
-	self recordMovementOf: piece to: square
+	self recordMovementOf: piece to: square.
+	self recordMovementOf: piece to: square.
 ]
 
 { #category : 'accessing' }
@@ -173,4 +228,10 @@ MyChessGame >> recordMovementOf: aPiece to: aSquare [
 	].
 	
 	movesLabel text: movesText
+]
+
+{ #category : 'accessing' }
+MyChessGame >> removePieceAt: square [
+    
+    self at: square put: nil.
 ]
