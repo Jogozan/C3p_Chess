@@ -5,10 +5,10 @@ Class {
 	#package : 'Myg-Chess-Core'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 MyPawn >> canPromote [
-	^ (self isWhite and: [ square name endsWith: '8' ]) or: [
-		  self isWhite not and: [ square name endsWith: '1' ] ]
+	^ (self isWhite and: [ square up name endsWith: '8' ]) or: [
+		  self isWhite not and: [ square down name endsWith: '1' ] ]
 ]
 
 { #category : 'accessing' }
@@ -20,7 +20,6 @@ MyPawn >> id [
 { #category : 'as yet unclassified' }
 MyPawn >> promoteTo: aPieceClass [
 	| promotedPiece |
-	self canPromote ifFalse: [ ^ self ].
 
 	promotedPiece := aPieceClass new.
 	promotedPiece color: self color.
@@ -29,6 +28,18 @@ MyPawn >> promoteTo: aPieceClass [
 	square contents: promotedPiece.
 
 	^ promotedPiece
+
+]
+
+{ #category : 'as yet unclassified' }
+MyPawn >> promoteWindow [
+
+	| window chevalier |
+	window := BlSpace new.
+	chevalier := ToButton new.
+	chevalier labelText: 'chevalier'.
+	window root addChild: chevalier.
+	window show
 ]
 
 { #category : 'rendering' }
