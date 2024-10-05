@@ -87,11 +87,13 @@ MyChessGame >> delete: piece [
 { #category : 'delete' }
 MyChessGame >> editor [
 
-	| buttonDelete buttonFinsish editorPane x |
+	| buttonDelete buttonFinsish buttonRole editorPane x |
 	buttonDelete := ToButton new.
 	buttonDelete labelText: 'Delete!'.
 	buttonFinsish := ToButton new.
 	buttonFinsish labelText: 'Finish!'.
+	buttonRole := ToButton new.
+	buttonRole labelText: 'Change Role'.
 
 	editorPane := ToElement new.
 	editorPane constraintsDo: [ :c |
@@ -105,6 +107,8 @@ MyChessGame >> editor [
 	self addChild: editorPane.
 	editorPane addChild: buttonDelete.
 	editorPane addChild: buttonFinsish.
+	"implementing button role"
+	editorPane addChild: buttonRole.
 
 	"delete when click to the button delete"
 	buttonDelete whenClickedDo: [ self makeEmpty: piece ].
