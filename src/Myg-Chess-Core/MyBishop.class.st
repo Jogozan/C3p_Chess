@@ -20,8 +20,24 @@ MyBishop >> renderPieceOn: aSquare [
 { #category : 'rendering' }
 MyBishop >> targetSquaresLegal: aBoolean [
 
-	^ (self upRightDiagonalLegal: aBoolean)
-	  , (self upLeftDiagonalLegal: aBoolean)
-	  , (self downRightDiagonalLegal: aBoolean)
-	  , (self downLeftDiagonalLegal: aBoolean)
+	| likeABishop likeARook game |
+	"initialize MyChessGame"
+	game := MyChessGame new.
+	"If click Button change role then act like a queen"
+	game changingRole
+		ifTrue: [ "Action Queen"
+			likeABishop := (self upRightDiagonalLegal: aBoolean)
+			               , (self upLeftDiagonalLegal: aBoolean)
+			               , (self downRightDiagonalLegal: aBoolean)
+			               , (self downLeftDiagonalLegal: aBoolean).
+			likeARook := (self upFileLegal: aBoolean)
+			             , (self downFileLegal: aBoolean)
+			             , (self leftFileLegal: aBoolean)
+			             , (self rightFileLegal: aBoolean).
+			^ likeABishop , likeARook ]
+		ifFalse: [ "action normal"
+			^ (self upRightDiagonalLegal: aBoolean)
+			  , (self upLeftDiagonalLegal: aBoolean)
+			  , (self downRightDiagonalLegal: aBoolean)
+			  , (self downLeftDiagonalLegal: aBoolean) ]
 ]

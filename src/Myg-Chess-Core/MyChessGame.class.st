@@ -63,6 +63,14 @@ MyChessGame >> activity: piece to: square [
 	self x
 ]
 
+{ #category : 'modification' }
+MyChessGame >> changingRole [
+	"Modification state Role"
+	| doChange |
+	doChange := false. 
+	doChange := doChange not.
+]
+
 { #category : 'playing' }
 MyChessGame >> checkForMate [
 
@@ -87,7 +95,7 @@ MyChessGame >> delete: piece [
 { #category : 'delete' }
 MyChessGame >> editor [
 
-	| buttonDelete buttonFinsish buttonRole editorPane x |
+	| buttonDelete buttonFinsish buttonRole editorPane |
 	buttonDelete := ToButton new.
 	buttonDelete labelText: 'Delete!'.
 	buttonFinsish := ToButton new.
@@ -112,6 +120,8 @@ MyChessGame >> editor [
 
 	"delete when click to the button delete"
 	buttonDelete whenClickedDo: [ self makeEmpty: piece ].
+	buttonRole whenClickedDo: [ self changingRole ].
+
 	^ self
 ]
 
