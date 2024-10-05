@@ -20,9 +20,7 @@ MyBishop >> renderPieceOn: aSquare [
 { #category : 'rendering' }
 MyBishop >> targetSquaresLegal: aBoolean [
 
-	| likeABishop likeARook game |
-	"initialize MyChessGame"
-	game := MyChessGame new.
+	| likeABishop likeARook |
 	"If click Button change role then act like a queen"
 	game changingRole
 		ifTrue: [ "Action Queen"

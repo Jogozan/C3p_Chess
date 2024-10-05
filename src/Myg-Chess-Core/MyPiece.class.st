@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'color',
-		'square'
+		'square',
+		'game'
 	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
@@ -131,6 +132,12 @@ MyPiece >> id [
 	^ 'Q'
 ]
 
+{ #category : 'initialization' }
+MyPiece >> initializeForGame: aGame [
+
+	game:= aGame "Stocke l'instance de MyChessGame"
+]
+
 { #category : 'testing' }
 MyPiece >> isKing [
 	
@@ -175,6 +182,12 @@ MyPiece >> moveTo: aSquare [
 	square emptyContents.
 	square := aSquare.
 	aSquare contents: self
+]
+
+{ #category : 'instance creation' }
+MyPiece >> newForGame: aGame [
+
+	^ self new initializeForGame: aGame
 ]
 
 { #category : 'rendering' }
