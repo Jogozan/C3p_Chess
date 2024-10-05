@@ -79,6 +79,12 @@ MyPiece >> color: aColor [
 	color := aColor
 ]
 
+{ #category : 'path commands' }
+MyPiece >> deleteMyPiece [
+	"Deleting my piece"
+	square emptyContents
+]
+
 { #category : 'rendering' }
 MyPiece >> downFile [
 

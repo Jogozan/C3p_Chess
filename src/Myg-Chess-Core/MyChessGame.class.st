@@ -78,6 +78,12 @@ MyChessGame >> clickOnDelete [
 	"square contents: nil"
 ]
 
+{ #category : 'public' }
+MyChessGame >> delete: piece [
+	"Sending message from MyPiece"
+	piece deletePiece.
+]
+
 { #category : 'delete' }
 MyChessGame >> editor [
 
@@ -99,10 +105,9 @@ MyChessGame >> editor [
 	self addChild: editorPane.
 	editorPane addChild: buttonDelete.
 	editorPane addChild: buttonFinsish.
-	
-	x := MyChessSquare new.
-	x delete. 
-	buttonDelete whenClickedDo: [self clickOnDelete ].
+
+	"delete when click to the button delete"
+	buttonDelete whenClickedDo: [ self makeEmpty: piece ].
 	^ self
 ]
 
@@ -175,6 +180,12 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	self constraintsDo: [ :aLayoutConstraints |
 		aLayoutConstraints horizontal fitContent.
 		aLayoutConstraints vertical fitContent ]
+]
+
+{ #category : 'public' }
+MyChessGame >> makeEmpty: piece [
+	"Sending message from MyPiece"
+	piece deletePiece.
 ]
 
 { #category : 'public' }
