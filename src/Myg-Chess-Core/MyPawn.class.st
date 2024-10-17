@@ -19,27 +19,37 @@ MyPawn >> id [
 
 { #category : 'as yet unclassified' }
 MyPawn >> promoteTo: aPieceClass [
-	| promotedPiece |
+	aPieceClass color: self color.
+	aPieceClass square: square.
+	square contents: aPieceClass.
 
-	promotedPiece := aPieceClass new.
-	promotedPiece color: self color.
-	promotedPiece square: square.
-
-	square contents: promotedPiece.
-
-	^ promotedPiece
+	^ aPieceClass
 
 ]
 
 { #category : 'as yet unclassified' }
 MyPawn >> promoteWindow [
 
-	| window chevalier |
+	| window rook queen bishop knight pane|
+	pane := ToPane vertical.
 	window := BlSpace new.
-	chevalier := ToButton new.
-	chevalier whenClickedDo:[self promoteTo: MyKnight ].
-	chevalier labelText: 'chevalier'.
-	window root addChild: chevalier.
+	knight := ToButton new.
+	knight whenClickedDo:[self promoteTo: MyKnight new ].
+	knight labelText: 'chevalier'.
+	queen := ToButton new.
+	queen whenClickedDo:[self promoteTo: MyQueen new ].
+	queen labelText: 'chevalier'.
+	rook := ToButton new.
+	rook whenClickedDo:[self promoteTo: MyRook new ].
+	rook labelText: 'chevalier'.
+	bishop := ToButton new.
+	bishop whenClickedDo:[self promoteTo: MyBishop new ].
+	bishop labelText: 'chevalier'.
+	pane addChild: knight.
+	pane addChild: bishop.
+	pane addChild: rook.
+	pane addChild: queen.
+	window root addChild: pane.
 	window show
 ]
 
