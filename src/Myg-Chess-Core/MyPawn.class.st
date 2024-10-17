@@ -37,6 +37,7 @@ MyPawn >> promoteWindow [
 	| window chevalier |
 	window := BlSpace new.
 	chevalier := ToButton new.
+	chevalier whenClickedDo:[self promoteTo: MyKnight ].
 	chevalier labelText: 'chevalier'.
 	window root addChild: chevalier.
 	window show

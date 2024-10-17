@@ -44,7 +44,7 @@ MyPiece >> canPromote [
 
 { #category : 'testing' }
 MyPiece >> canPromoteGeneric [
-	^ self canPromote
+	^ self canPromote.
 ]
 
 { #category : 'rendering' }
@@ -176,8 +176,7 @@ MyPiece >> moveTo: aSquare [
 
 	(self legalTargetSquares includes: aSquare) ifFalse: [ ^ self ].
 
-	self canPromoteGeneric ifTrue: [ self promoteWindow ].
-
+	(self canPromoteGeneric) ifTrue: [ self promoteWindow ].
 	square emptyContents.
 	square := aSquare.
 	aSquare contents: self
