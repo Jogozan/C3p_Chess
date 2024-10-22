@@ -63,6 +63,43 @@ MyChessGame >> activity: piece to: square [
 	self x
 ]
 
+{ #category : 'delete' }
+MyChessGame >> add [
+
+	| buttonBishop buttonKnight buttonPawn buttonQueen buttonRook editorPane |
+	buttonBishop := ToButton new.
+	buttonBishop labelText: 'Bishop'.
+	buttonKnight := ToButton new.
+	buttonKnight labelText: 'Knight'.
+	buttonPawn := ToButton new.
+	buttonPawn labelText: 'Pawn'.
+	buttonQueen := ToButton new.
+	buttonQueen labelText: 'Queen'.
+	buttonRook := ToButton new.
+	buttonRook labelText: 'Rook'.
+
+	editorPane := ToElement new.
+	editorPane constraintsDo: [ :c |
+		c vertical fitContent.
+		c horizontal matchParent ].
+	editorPane layout: BlLinearLayout vertical .
+	editorPane layout cellSpacing: 10.
+	editorPane margin: (BlInsets all: 20).
+	editorPane matchParent.
+
+	self addChild: editorPane.
+	editorPane addChild: buttonBishop.
+	editorPane addChild: buttonKnight.
+	editorPane addChild: buttonPawn.
+	editorPane addChild: buttonQueen.
+	editorPane addChild: buttonRook.
+
+	"adding Queen when click to the button"
+	buttonPawn whenClickedDo: [ self addPawn: square ].
+
+	^ self
+]
+
 { #category : 'modification' }
 MyChessGame >> changingRole [
 	"Modification state Role"
@@ -95,13 +132,15 @@ MyChessGame >> delete: piece [
 { #category : 'delete' }
 MyChessGame >> editor [
 
-	| buttonDelete buttonFinsish buttonRole editorPane |
+	| buttonDelete buttonFinsish buttonRole buttonAdd editorPane |
 	buttonDelete := ToButton new.
 	buttonDelete labelText: 'Delete!'.
 	buttonFinsish := ToButton new.
 	buttonFinsish labelText: 'Finish!'.
 	buttonRole := ToButton new.
 	buttonRole labelText: 'Change Role'.
+	buttonAdd := ToButton new.
+	buttonAdd labelText: 'Add piece'.
 
 	editorPane := ToElement new.
 	editorPane constraintsDo: [ :c |
@@ -118,9 +157,14 @@ MyChessGame >> editor [
 	"implementing button role"
 	editorPane addChild: buttonRole.
 
+	"implementing button piece"
+	editorPane addChild: buttonAdd .
+
 	"delete when click to the button delete"
-	buttonDelete whenClickedDo: [ self makeEmpty: piece ].
+	"buttonDelete whenClickedDo: [ self makeEmpty: piece ]."
+	buttonDelete whenClickedDo: [ self makeEmpty: square ].
 	buttonRole whenClickedDo: [ self changingRole ].
+	buttonAdd whenClickedDo: [ self add].
 
 	^ self
 ]
@@ -197,9 +241,11 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 ]
 
 { #category : 'public' }
-MyChessGame >> makeEmpty: piece [
+MyChessGame >> makeEmpty: square [ 
 	"Sending message from MyPiece"
-	piece deletePiece.
+	"piece deletePiece."
+	self at: square put: nil.
+	
 ]
 
 { #category : 'public' }

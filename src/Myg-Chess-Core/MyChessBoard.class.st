@@ -34,6 +34,14 @@ MyChessBoard class >> new [
 	self error: 'Please use the other constructors'
 ]
 
+{ #category : 'initialization' }
+MyChessBoard >> addPawn: square [
+
+	| black |
+	black := false.
+	self at: square put: MyRook white.
+]
+
 { #category : 'accessing' }
 MyChessBoard >> at: coordinate [
 
