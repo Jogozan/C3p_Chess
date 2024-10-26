@@ -76,9 +76,15 @@ MyChessBoard >> blackColor: anObject [
 ]
 
 { #category : 'event handling' }
-MyChessBoard >> click: aMyChessSquare [ 
+MyChessBoard >> click: aMyChessSquare [
+
+	^ state delete: aMyChessSquare
+]
+
+{ #category : 'event handling' }
+MyChessBoard >> click: aMyChessSquare delete: aMyChessSquare [
+
 	
-	state := state clickOn: aMyChessSquare
 ]
 
 { #category : 'accessing' }
