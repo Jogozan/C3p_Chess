@@ -78,10 +78,15 @@ MyChessBoard >> blackColor: anObject [
 { #category : 'event handling' }
 MyChessBoard >> click: aMyChessSquare [
 
-	Transcript show: #deleteMode.
-	#deleteMode = 'delete'
-		ifTrue: [ state delete: aMyChessSquare ]
-		ifFalse: [ state := state clickOn: aMyChessSquare ]
+	| file word |
+	"Ouvrir le fichier et lire le contenu"
+	file := FileSystem workingDirectory / 'modeDelete.txt'.
+	word := file readStreamDo: [ :stream | stream contents trimBoth ].
+
+	"Retourner le mot"
+	word='deleteOn'
+		  ifTrue: [ state delete: aMyChessSquare ]
+		  ifFalse: [ state := state clickOn: aMyChessSquare ]
 ]
 
 { #category : 'event handling' }

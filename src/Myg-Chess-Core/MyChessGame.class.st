@@ -101,6 +101,20 @@ MyChessGame >> add [
 	^ self
 ]
 
+{ #category : 'actions' }
+MyChessGame >> cancel [
+
+	| file |
+	file := FileSystem workingDirectory / 'modeDelete.txt'.
+
+	"Delete file if exist"
+	file exists ifTrue: [ file delete ].
+
+	"Créer un nouveau fichier vide"
+	file writeStreamDo: [ :stream | "Ne rien écrire, juste créer un fichier vide"
+		 ]
+]
+
 { #category : 'modification' }
 MyChessGame >> changingRole [
 	"Modification state Role"
@@ -133,7 +147,7 @@ MyChessGame >> delete: piece [
 { #category : 'delete' }
 MyChessGame >> editor [
 
-	| buttonDelete buttonFinsish buttonRole buttonAdd editorPane |
+	| buttonDelete buttonFinsish buttonRole buttonAdd buttonCancel editorPane |
 	buttonDelete := ToButton new.
 	buttonDelete labelText: 'Delete!'.
 	buttonFinsish := ToButton new.
@@ -142,6 +156,8 @@ MyChessGame >> editor [
 	buttonRole labelText: 'Change Role'.
 	buttonAdd := ToButton new.
 	buttonAdd labelText: 'Add piece'.
+		buttonCancel := ToButton new.
+	buttonCancel labelText: 'Cancel Delete'.
 
 	editorPane := ToElement new.
 	editorPane constraintsDo: [ :c |
@@ -160,12 +176,18 @@ MyChessGame >> editor [
 
 	"implementing button piece"
 	editorPane addChild: buttonAdd .
+	
+		"implementing cancle delete"
+	editorPane addChild: buttonCancel .
 
 	"delete when click to the button delete"
 	"buttonDelete whenClickedDo: [ self makeEmpty: piece ]."
 	buttonDelete whenClickedDo: [ self switchToDeleteMode ].
 	buttonRole whenClickedDo: [ self changingRole ].
 	buttonAdd whenClickedDo: [ self add].
+	
+	"appel method cancel with button"
+	buttonCancel whenClickedDo: [ self cancel].
 
 	^ self
 ]
@@ -200,32 +222,43 @@ MyChessGame >> initializeFonts [
 
 { #category : 'initialization' }
 MyChessGame >> initializeFromFENGame: aFENGame [
+	"db: file textData"
 
-	| button buttonEditor infoPane |
+	| button buttonEditor infoPane file |
+	"creation of data file"
+file := FileSystem workingDirectory / 'modeDelete.txt'.
+
+"Delete file if exist"
+file exists ifTrue: [ file delete ].
+
+"Créer un nouveau fichier vide"
+file writeStreamDo: [ :stream | "Ne rien écrire, juste créer un fichier vide" ].
+
+	"normal"
 	aFENGame sideToMove = 'White'
 		ifTrue: [ currentPlayer := whitePlayer ]
 		ifFalse: [ currentPlayer := blackPlayer ].
-		
+
 	moveCount := aFENGame moveCount.
 
 	board := MyChessBoard fromFENBoard: aFENGame board.
 	board game: self.
 	button := ToButton new.
 	button labelText: 'Play!'.
-	buttonEditor := ToButton new. 
+	buttonEditor := ToButton new.
 	buttonEditor labelText: 'Editor !'.
 	button whenClickedDo: [ self play ].
 	buttonEditor whenClickedDo: [ self editor ].
-	
+
 	infoPane := ToElement new.
-	infoPane constraintsDo: [ :c | 
-		        c vertical fitContent.
-		        c horizontal matchParent ].
+	infoPane constraintsDo: [ :c |
+		c vertical fitContent.
+		c horizontal matchParent ].
 	infoPane layout: BlLinearLayout vertical.
 	infoPane layout cellSpacing: 10.
 	infoPane margin: (BlInsets all: 20).
 	infoPane matchParent.
-	
+
 	movesLabel := ToLabel new beMultiLine.
 	movesLabel matchParent.
 
@@ -233,7 +266,7 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	self addChild: infoPane.
 	infoPane addChild: movesLabel.
 	infoPane addChild: button.
-	infoPane addChild: buttonEditor. 
+	infoPane addChild: buttonEditor.
 
 	self layout: BlLinearLayout horizontal.
 	self constraintsDo: [ :aLayoutConstraints |
@@ -285,7 +318,7 @@ MyChessGame >> recordMovementOf: aPiece to: aSquare [
 		          ifFalse: [ '' ].
 	moves add: prefix , ' ' , aPiece id , aSquare name.
 
-	"movesText := String streamContents: [ :stream |
+	movesText := String streamContents: [ :stream |
 		| currentLine |
 		currentLine := ''.
 		moves do: [ :m |
@@ -298,13 +331,8 @@ MyChessGame >> recordMovementOf: aPiece to: aSquare [
 		].
 		stream nextPutAll: currentLine
 	].
-	"
-	movesText := String streamContents: [ :stream |
-		             | currentLine |
-		             currentLine := 'test' , piece .
+	
 
-
-		             stream nextPutAll: currentLine ].
 	movesLabel text: movesText
 ]
 
@@ -318,10 +346,10 @@ MyChessGame >> removePieceAt: square [
 MyChessGame >> switchToDeleteMode [
 
 	| file textData |
-	"Description of word"
+	"Definition of word"
 	textData := 'deleteOn'.
 
-	"Open file and edit"
-	file := FileSystem workingDirectory / 'data.txt'.
+	"Open and edit file"
+	file := FileSystem workingDirectory / 'modeDelete.txt'.
 	file writeStreamDo: [ :stream | stream nextPutAll: textData ]
 ]
