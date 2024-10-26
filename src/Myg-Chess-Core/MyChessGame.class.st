@@ -25,6 +25,7 @@ Class {
 		'movesLabel',
 		'moveCountLabel',
 		'moves',
+		'deleteMode',
 		'dsp'
 	],
 	#category : 'Myg-Chess-Core',
@@ -162,7 +163,7 @@ MyChessGame >> editor [
 
 	"delete when click to the button delete"
 	"buttonDelete whenClickedDo: [ self makeEmpty: piece ]."
-	buttonDelete whenClickedDo: [ self makeEmpty: square ].
+	buttonDelete whenClickedDo: [ self switchToDeleteMode ].
 	buttonRole whenClickedDo: [ self changingRole ].
 	buttonAdd whenClickedDo: [ self add].
 
@@ -283,8 +284,8 @@ MyChessGame >> recordMovementOf: aPiece to: aSquare [
 		          ifTrue: [ moveCount asString , '.' ]
 		          ifFalse: [ '' ].
 	moves add: prefix , ' ' , aPiece id , aSquare name.
-	
-	movesText := String streamContents: [ :stream |
+
+	"movesText := String streamContents: [ :stream |
 		| currentLine |
 		currentLine := ''.
 		moves do: [ :m |
@@ -297,7 +298,13 @@ MyChessGame >> recordMovementOf: aPiece to: aSquare [
 		].
 		stream nextPutAll: currentLine
 	].
-	
+	"
+	movesText := String streamContents: [ :stream |
+		             | currentLine |
+		             currentLine := 'test' , piece .
+
+
+		             stream nextPutAll: currentLine ].
 	movesLabel text: movesText
 ]
 
@@ -305,4 +312,16 @@ MyChessGame >> recordMovementOf: aPiece to: aSquare [
 MyChessGame >> removePieceAt: square [
     
     self at: square put: nil.
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToDeleteMode [
+
+	| file textData |
+	"Description of word"
+	textData := 'deleteOn'.
+
+	"Open file and edit"
+	file := FileSystem workingDirectory / 'data.txt'.
+	file writeStreamDo: [ :stream | stream nextPutAll: textData ]
 ]

@@ -78,13 +78,16 @@ MyChessBoard >> blackColor: anObject [
 { #category : 'event handling' }
 MyChessBoard >> click: aMyChessSquare [
 
-	^ state delete: aMyChessSquare
+	Transcript show: #deleteMode.
+	#deleteMode = 'delete'
+		ifTrue: [ state delete: aMyChessSquare ]
+		ifFalse: [ state := state clickOn: aMyChessSquare ]
 ]
 
 { #category : 'event handling' }
-MyChessBoard >> click: aMyChessSquare delete: aMyChessSquare [
+MyChessBoard >> clickDelete: aMyChessSquare [
 
-	
+	^ state delete: aMyChessSquare
 ]
 
 { #category : 'accessing' }
