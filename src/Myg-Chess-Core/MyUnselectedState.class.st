@@ -16,6 +16,12 @@ MyUnselectedState class >> board: aBoard [
 		  yourself
 ]
 
+{ #category : 'events' }
+MyUnselectedState >> addQueen: aMyChessSquare [
+
+	aMyChessSquare contents: MyQueen white
+]
+
 { #category : 'accessing' }
 MyUnselectedState >> board [
 
@@ -33,17 +39,6 @@ MyUnselectedState >> clickOn: aMyChessSquare [
 	"Nothing is selected.
 	Select the chess square"
 
-	aMyChessSquare select.
-	aMyChessSquare contents ifNotNil: [
-		board highLightTargets: aMyChessSquare contents targetSquares ].
-
-	^ MySelectedState board: board selected: aMyChessSquare
-]
-
-{ #category : 'events' }
-MyUnselectedState >> clickOnRight: aMyChessSquare [
-	"Nothing is selected.
-	Select the chess square"
 	aMyChessSquare select.
 	aMyChessSquare contents ifNotNil: [
 		board highLightTargets: aMyChessSquare contents targetSquares ].

@@ -83,7 +83,7 @@ MyChessGame >> add [
 	editorPane constraintsDo: [ :c |
 		c vertical fitContent.
 		c horizontal matchParent ].
-	editorPane layout: BlLinearLayout vertical .
+	editorPane layout: BlLinearLayout vertical.
 	editorPane layout cellSpacing: 10.
 	editorPane margin: (BlInsets all: 20).
 	editorPane matchParent.
@@ -95,24 +95,19 @@ MyChessGame >> add [
 	editorPane addChild: buttonQueen.
 	editorPane addChild: buttonRook.
 
-	"adding Queen when click to the button"
-	buttonPawn whenClickedDo: [ self addPawn: square ].
+	buttonQueen whenClickedDo: [ self switchToAddMode ].
 
 	^ self
 ]
 
 { #category : 'actions' }
 MyChessGame >> cancel [
+	"canceling the delete mode"
 
 	| file |
 	file := FileSystem workingDirectory / 'modeDelete.txt'.
-
-	"Delete file if exist"
 	file exists ifTrue: [ file delete ].
-
-	"Créer un nouveau fichier vide"
-	file writeStreamDo: [ :stream | "Ne rien écrire, juste créer un fichier vide"
-		 ]
+	file writeStreamDo: [ :stream | "just create file" ]
 ]
 
 { #category : 'modification' }
@@ -130,20 +125,6 @@ MyChessGame >> checkForMate [
 	blackPlayer king isCheckMated ifTrue: [ self halt: 'White wins!' ].
 ]
 
-{ #category : 'accessing' }
-MyChessGame >> clickOnDelete [
-
-	Transcript show: 'iciiii'.
-	square border: Color red.
-	"square contents: nil"
-]
-
-{ #category : 'public' }
-MyChessGame >> delete: piece [
-	"Sending message from MyPiece"
-	piece deletePiece.
-]
-
 { #category : 'delete' }
 MyChessGame >> editor [
 
@@ -156,7 +137,7 @@ MyChessGame >> editor [
 	buttonRole labelText: 'Change Role'.
 	buttonAdd := ToButton new.
 	buttonAdd labelText: 'Add piece'.
-		buttonCancel := ToButton new.
+	buttonCancel := ToButton new.
 	buttonCancel labelText: 'Cancel Delete'.
 
 	editorPane := ToElement new.
@@ -171,23 +152,18 @@ MyChessGame >> editor [
 	self addChild: editorPane.
 	editorPane addChild: buttonDelete.
 	editorPane addChild: buttonFinsish.
-	"implementing button role"
 	editorPane addChild: buttonRole.
+	editorPane addChild: buttonAdd.
+	editorPane addChild: buttonCancel.
 
-	"implementing button piece"
-	editorPane addChild: buttonAdd .
-	
-		"implementing cancle delete"
-	editorPane addChild: buttonCancel .
-
-	"delete when click to the button delete"
-	"buttonDelete whenClickedDo: [ self makeEmpty: piece ]."
 	buttonDelete whenClickedDo: [ self switchToDeleteMode ].
 	buttonRole whenClickedDo: [ self changingRole ].
-	buttonAdd whenClickedDo: [ self add].
-	
+	buttonAdd whenClickedDo: [ 
+		self add ].
+
+
 	"appel method cancel with button"
-	buttonCancel whenClickedDo: [ self cancel].
+	buttonCancel whenClickedDo: [ self cancel ].
 
 	^ self
 ]
@@ -222,17 +198,22 @@ MyChessGame >> initializeFonts [
 
 { #category : 'initialization' }
 MyChessGame >> initializeFromFENGame: aFENGame [
-	"db: file textData"
 
-	| button buttonEditor infoPane file |
-	"creation of data file"
-file := FileSystem workingDirectory / 'modeDelete.txt'.
+	| button buttonEditor infoPane fileDelete fileEdit fileAdd word |
+	"data file delete"
+	fileDelete := FileSystem workingDirectory / 'modeDelete.txt'.
+	fileDelete exists ifTrue: [ fileDelete delete ].
+	fileDelete writeStreamDo: [ :stream | "just create file" ].
 
-"Delete file if exist"
-file exists ifTrue: [ file delete ].
-
-"Créer un nouveau fichier vide"
-file writeStreamDo: [ :stream | "Ne rien écrire, juste créer un fichier vide" ].
+	"data file edit"
+	fileEdit := FileSystem workingDirectory / 'modeEdit.txt'.
+	fileEdit exists ifTrue: [ fileEdit delete ].
+	fileEdit writeStreamDo: [ :stream | "just create file" ].
+	
+	"data file edit"
+	fileAdd := FileSystem workingDirectory / 'modeAdd.txt'.
+	fileAdd exists ifTrue: [ fileAdd delete ].
+	fileAdd writeStreamDo: [ :stream | "just create file" ].
 
 	"normal"
 	aFENGame sideToMove = 'White'
@@ -247,8 +228,6 @@ file writeStreamDo: [ :stream | "Ne rien écrire, juste créer un fichier vide" 
 	button labelText: 'Play!'.
 	buttonEditor := ToButton new.
 	buttonEditor labelText: 'Editor !'.
-	button whenClickedDo: [ self play ].
-	buttonEditor whenClickedDo: [ self editor ].
 
 	infoPane := ToElement new.
 	infoPane constraintsDo: [ :c |
@@ -268,6 +247,20 @@ file writeStreamDo: [ :stream | "Ne rien écrire, juste créer un fichier vide" 
 	infoPane addChild: button.
 	infoPane addChild: buttonEditor.
 
+	button whenClickedDo: [ self play ].
+	buttonEditor whenClickedDo: [ self editor ].
+
+	"switch to editMode"
+	"
+	buttonEditor whenClickedDo: [ self switchToEditorMode ].
+	word := fileEdit readStreamDo: [ :stream | stream contents trimBoth ].
+	word = 'editOn'
+		ifTrue: [
+			infoPane removeChild: button.
+			self editor ]
+		ifFalse: [ button ifNil: [ infoPane addChild: button ] ].
+	"
+
 	self layout: BlLinearLayout horizontal.
 	self constraintsDo: [ :aLayoutConstraints |
 		aLayoutConstraints horizontal fitContent.
@@ -275,18 +268,9 @@ file writeStreamDo: [ :stream | "Ne rien écrire, juste créer un fichier vide" 
 ]
 
 { #category : 'public' }
-MyChessGame >> makeEmpty: square [ 
-	"Sending message from MyPiece"
-	"piece deletePiece."
-	self at: square put: nil.
-	
-]
-
-{ #category : 'public' }
 MyChessGame >> move: piece to: square [
 
 	piece moveTo: square.
-	self recordMovementOf: piece to: square.
 	self recordMovementOf: piece to: square.
 ]
 
@@ -343,13 +327,37 @@ MyChessGame >> removePieceAt: square [
 ]
 
 { #category : 'as yet unclassified' }
+MyChessGame >> switchToAddMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'modeAdd.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
 MyChessGame >> switchToDeleteMode [
 
 	| file textData |
-	"Definition of word"
+	"Definition of mode"
 	textData := 'deleteOn'.
 
 	"Open and edit file"
 	file := FileSystem workingDirectory / 'modeDelete.txt'.
+	file writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToEditorMode [
+
+	| file textData |
+	"Definition of mode"
+	textData := 'editOn'.
+
+	"Open and edit file"
+	file := FileSystem workingDirectory / 'modeEdit.txt'.
 	file writeStreamDo: [ :stream | stream nextPutAll: textData ]
 ]

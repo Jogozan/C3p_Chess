@@ -34,14 +34,6 @@ MyChessBoard class >> new [
 	self error: 'Please use the other constructors'
 ]
 
-{ #category : 'initialization' }
-MyChessBoard >> addPawn: square [
-
-	| black |
-	black := false.
-	self at: square put: MyRook white.
-]
-
 { #category : 'accessing' }
 MyChessBoard >> at: coordinate [
 
@@ -78,15 +70,25 @@ MyChessBoard >> blackColor: anObject [
 { #category : 'event handling' }
 MyChessBoard >> click: aMyChessSquare [
 
-	| file word |
+	| fileDelete fileAdd word wordAdd |
 	"Ouvrir le fichier et lire le contenu"
-	file := FileSystem workingDirectory / 'modeDelete.txt'.
-	word := file readStreamDo: [ :stream | stream contents trimBoth ].
+	fileDelete := FileSystem workingDirectory / 'modeDelete.txt'.
+	fileAdd := FileSystem workingDirectory / 'modeAdd.txt'.
+	word := fileDelete readStreamDo: [ :stream |
+		        stream contents trimBoth ].
+	wordAdd := fileAdd readStreamDo: [ :stream |
+		           stream contents trimBoth ].
 
-	"Retourner le mot"
-	word='deleteOn'
-		  ifTrue: [ state delete: aMyChessSquare ]
-		  ifFalse: [ state := state clickOn: aMyChessSquare ]
+	"verification of word"
+	"word = 'deleteOn'
+		ifTrue: [ state delete: aMyChessSquare ]
+		ifFalse: [ state := state clickOn: aMyChessSquare ]."
+
+
+	wordAdd = 'addOn'
+		ifTrue: [ state := state addQueen: aMyChessSquare ]
+		ifFalse: [ state := state clickOn: aMyChessSquare ]
+	"ifTrue: [ aMyChessSquare put: MyQueen white ]"
 ]
 
 { #category : 'event handling' }
