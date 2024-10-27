@@ -22,6 +22,18 @@ MyUnselectedState >> addQueen: aMyChessSquare [
 	aMyChessSquare contents: MyQueen white
 ]
 
+{ #category : 'events' }
+MyUnselectedState >> addQueenBlack: aMyChessSquare [
+
+	aMyChessSquare contents: MyQueen black
+]
+
+{ #category : 'events' }
+MyUnselectedState >> addQueenWhite: aMyChessSquare [
+
+	aMyChessSquare contents: MyQueen white
+]
+
 { #category : 'accessing' }
 MyUnselectedState >> board [
 

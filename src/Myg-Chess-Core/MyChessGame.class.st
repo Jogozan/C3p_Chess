@@ -67,7 +67,7 @@ MyChessGame >> activity: piece to: square [
 { #category : 'delete' }
 MyChessGame >> add [
 
-	| buttonBishop buttonKnight buttonPawn buttonQueen buttonRook editorPane |
+	| buttonBishop buttonKnight buttonPawn buttonQueen buttonQueenWhite buttonRook editorPane |
 	buttonBishop := ToButton new.
 	buttonBishop labelText: 'Bishop'.
 	buttonKnight := ToButton new.
@@ -78,6 +78,8 @@ MyChessGame >> add [
 	buttonQueen labelText: 'Queen'.
 	buttonRook := ToButton new.
 	buttonRook labelText: 'Rook'.
+	buttonQueenWhite := ToButton new.
+	buttonQueenWhite labelText: 'QueenWhite'.
 
 	editorPane := ToElement new.
 	editorPane constraintsDo: [ :c |
@@ -94,8 +96,41 @@ MyChessGame >> add [
 	editorPane addChild: buttonPawn.
 	editorPane addChild: buttonQueen.
 	editorPane addChild: buttonRook.
+	
+	"buttonQueen whenClickedDo: [ self switchToAddMode ]."
+	buttonQueen whenClickedDo: [ self addQueenColor ].
+	
+	buttonPawn whenClickedDo: [ self switchToAddMode ].
 
-	buttonQueen whenClickedDo: [ self switchToAddMode ].
+
+	^ self
+]
+
+{ #category : 'adding' }
+MyChessGame >> addQueenColor [
+
+	| buttonQueenBlack buttonQueenWhite editorPane |
+	buttonQueenBlack := ToButton new.
+	buttonQueenBlack labelText: 'QueenBlack'.
+	buttonQueenWhite := ToButton new.
+	buttonQueenWhite labelText: 'QueenWhite'.
+
+	editorPane := ToElement new.
+	editorPane constraintsDo: [ :c |
+		c vertical fitContent.
+		c horizontal matchParent ].
+	editorPane layout: BlLinearLayout vertical.
+	editorPane layout cellSpacing: 10.
+	editorPane margin: (BlInsets all: 20).
+	editorPane matchParent.
+
+
+	self addChild: editorPane.
+	editorPane addChild: buttonQueenBlack.
+	editorPane addChild: buttonQueenWhite.
+	
+	buttonQueenBlack whenClickedDo: [ self switchToAddQueenBlackMode ].
+	buttonQueenWhite whenClickedDo: [ self switchToAddMode ].
 
 	^ self
 ]
@@ -210,10 +245,16 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	fileEdit exists ifTrue: [ fileEdit delete ].
 	fileEdit writeStreamDo: [ :stream | "just create file" ].
 	
-	"data file edit"
+	"data file add QW"
 	fileAdd := FileSystem workingDirectory / 'modeAdd.txt'.
 	fileAdd exists ifTrue: [ fileAdd delete ].
 	fileAdd writeStreamDo: [ :stream | "just create file" ].
+	
+	"data file add QB"
+	fileAdd := FileSystem workingDirectory / 'modeQBAdd.txt'.
+	fileAdd exists ifTrue: [ fileAdd delete ].
+	fileAdd writeStreamDo: [ :stream | "just create file" ].
+
 
 	"normal"
 	aFENGame sideToMove = 'White'
@@ -335,6 +376,18 @@ MyChessGame >> switchToAddMode [
 
 	"Open and edit file"
 	fileAdd := FileSystem workingDirectory / 'modeAdd.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToAddQueenBlackMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addQueenBlackOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'modeQBAdd.txt'.
 	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
 ]
 
