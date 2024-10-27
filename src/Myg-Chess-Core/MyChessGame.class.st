@@ -203,6 +203,47 @@ MyChessGame >> editor [
 	^ self
 ]
 
+{ #category : 'as yet unclassified' }
+MyChessGame >> initFileAddQB [
+
+	| fileAdd |
+	"data file add QW"
+	fileAdd := FileSystem workingDirectory / 'modeQBAdd.txt'.
+	fileAdd exists ifTrue: [ fileAdd delete ].
+	fileAdd writeStreamDo: [ :stream | "just create file" ]
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> initFileAddQW [
+	|fileAdd|
+	"data file add QW"
+	fileAdd := FileSystem workingDirectory / 'modeAdd.txt'.
+	fileAdd exists ifTrue: [ fileAdd delete ].
+	fileAdd writeStreamDo: [ :stream | "just create file" ].
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> initFileDelete [
+
+	|fileDelete|
+	"data file delete"
+	fileDelete := FileSystem workingDirectory / 'modeDelete.txt'.
+	fileDelete exists ifTrue: [ fileDelete delete ].
+	fileDelete writeStreamDo: [ :stream | "just create file" ].
+
+	
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> initFileEdit [
+	"data file edit"
+
+	| fileEdit |
+	fileEdit := FileSystem workingDirectory / 'modeEdit.txt'.
+	fileEdit exists ifTrue: [ fileEdit delete ].
+	fileEdit writeStreamDo: [ :stream | "just create file" ]
+]
+
 { #category : 'initialization' }
 MyChessGame >> initialize [
 
@@ -235,26 +276,38 @@ MyChessGame >> initializeFonts [
 MyChessGame >> initializeFromFENGame: aFENGame [
 
 	| button buttonEditor infoPane fileDelete fileEdit fileAdd word |
+	
 	"data file delete"
+	"
 	fileDelete := FileSystem workingDirectory / 'modeDelete.txt'.
 	fileDelete exists ifTrue: [ fileDelete delete ].
-	fileDelete writeStreamDo: [ :stream | "just create file" ].
+	fileDelete writeStreamDo: [ :stream |  ]."
+	
+	self initFileDelete.
 
 	"data file edit"
+	"
 	fileEdit := FileSystem workingDirectory / 'modeEdit.txt'.
 	fileEdit exists ifTrue: [ fileEdit delete ].
-	fileEdit writeStreamDo: [ :stream | "just create file" ].
+	fileEdit writeStreamDo: [ :stream |]."
+	self initFileEdit. 
 	
 	"data file add QW"
+	"
 	fileAdd := FileSystem workingDirectory / 'modeAdd.txt'.
 	fileAdd exists ifTrue: [ fileAdd delete ].
-	fileAdd writeStreamDo: [ :stream | "just create file" ].
+	fileAdd writeStreamDo: [ :stream | ]."
+	self initFileAddQW.
+	
+	
 	
 	"data file add QB"
+	"
 	fileAdd := FileSystem workingDirectory / 'modeQBAdd.txt'.
 	fileAdd exists ifTrue: [ fileAdd delete ].
-	fileAdd writeStreamDo: [ :stream | "just create file" ].
-
+	fileAdd writeStreamDo: [ :stream | ].
+	"
+	self initFileAddQW.
 
 	"normal"
 	aFENGame sideToMove = 'White'

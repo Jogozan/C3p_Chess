@@ -83,20 +83,26 @@ MyChessBoard >> click: aMyChessSquare [
 		           stream contents trimBoth ].
 
 	"verification of word for DELETE"
-	"word = 'deleteOn'
-		ifTrue: [ state delete: aMyChessSquare ]
-		ifFalse: [ state := state clickOn: aMyChessSquare ]."
+	word = 'deleteOn'
+		ifTrue: [ 
+			state initFileAddQB.
+			state delete: aMyChessSquare ]
+		ifFalse: [ state := state clickOn: aMyChessSquare ].
 
 
 	"verification of word for ADD QW"
 	"
 	wordAdd = 'addOn'
-		ifTrue: [ state := state addQueen: aMyChessSquare ]
+		ifTrue: [
+			
+			 state := state addQueen: aMyChessSquare ]
 		ifFalse: [ state := state clickOn: aMyChessSquare ]."
 	
 	"verification of word for ADD QB"
 	wordAddQB	 = 'addQueenBlackOn'
-		ifTrue: [ state := state addQueenBlack: aMyChessSquare ]
+		ifTrue: [ 
+			state initFileDelete.
+			state := state addQueenBlack: aMyChessSquare ]
 		ifFalse: [ state := state clickOn: aMyChessSquare ].
 	
 		
