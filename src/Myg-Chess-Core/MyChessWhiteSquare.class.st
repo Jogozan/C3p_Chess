@@ -6,22 +6,6 @@ Class {
 }
 
 { #category : 'accessing' }
-MyChessWhiteSquare >> contents: aPiece [ [
-    | text |
-    contents := aPiece.
-
-    text := contents
-        ifNil: [ 'z' ]
-        ifNotNil: [ contents renderPieceOn: self ].
-
-    piece text: (text asRopedText
-                 fontSize: 48;
-                 foreground: self foreground;
-                 fontName: MyOpenChessDownloadedFont new familyName)
-]
-]
-
-{ #category : 'accessing' }
 MyChessWhiteSquare >> foreground [
 			
 	^ board whiteColor
@@ -49,6 +33,12 @@ MyChessWhiteSquare >> renderKnight: aPiece [
 	^ aPiece isWhite
 		  ifFalse:  [ 'M' ]
 		  ifTrue: [ 'N' ]
+]
+
+{ #category : 'accessing' }
+MyChessWhiteSquare >> renderOnColor [
+    
+	^ 'z'
 ]
 
 { #category : 'rendering' }
