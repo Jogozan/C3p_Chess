@@ -85,7 +85,7 @@ MyChessBoard >> click: aMyChessSquare [
 	"verification of word for DELETE"
 	word = 'deleteOn'
 		ifTrue: [ 
-			state initFileAddQB.
+			game initFileAddQB.
 			state delete: aMyChessSquare ]
 		ifFalse: [ state := state clickOn: aMyChessSquare ].
 
@@ -101,7 +101,7 @@ MyChessBoard >> click: aMyChessSquare [
 	"verification of word for ADD QB"
 	wordAddQB	 = 'addQueenBlackOn'
 		ifTrue: [ 
-			state initFileDelete.
+			game initFileDelete.
 			state := state addQueenBlack: aMyChessSquare ]
 		ifFalse: [ state := state clickOn: aMyChessSquare ].
 	
