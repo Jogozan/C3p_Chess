@@ -70,43 +70,19 @@ MyChessBoard >> blackColor: anObject [
 { #category : 'event handling' }
 MyChessBoard >> click: aMyChessSquare [
 
-	| fileDelete fileAdd fileAddQB word wordAdd wordAddQB|
+	| fileDelete word |
 	"Ouvrir le fichier et lire le contenu"
-	fileDelete := FileSystem workingDirectory / 'modeDelete.txt'.
-	fileAdd := FileSystem workingDirectory / 'modeAdd.txt'.
-	fileAddQB := FileSystem workingDirectory / 'modeQBAdd.txt'.
+	fileDelete := FileSystem workingDirectory / 'mode.txt'.
 	word := fileDelete readStreamDo: [ :stream |
 		        stream contents trimBoth ].
-	wordAdd := fileAdd readStreamDo: [ :stream |
-		           stream contents trimBoth ].
-	wordAddQB := fileAddQB readStreamDo: [ :stream |
-		           stream contents trimBoth ].
 
-	"verification of word for DELETE"
-	word = 'deleteOn'
-		ifTrue: [ 
-			game initFileAddQB.
-			state delete: aMyChessSquare ]
-		ifFalse: [ state := state clickOn: aMyChessSquare ].
-
-
-	"verification of word for ADD QW"
-	"
-	wordAdd = 'addOn'
-		ifTrue: [
-			
-			 state := state addQueen: aMyChessSquare ]
-		ifFalse: [ state := state clickOn: aMyChessSquare ]."
-	
-	"verification of word for ADD QB"
-	wordAddQB	 = 'addQueenBlackOn'
-		ifTrue: [ 
-			game initFileDelete.
-			state := state addQueenBlack: aMyChessSquare ]
-		ifFalse: [ state := state clickOn: aMyChessSquare ].
-	
-		
-	"ifTrue: [ aMyChessSquare put: MyQueen white ]"
+	word
+		caseOf: {
+				([ 'deleteOn' ] -> [ state delete: aMyChessSquare ]).
+				([ 'addQueenBlackOn' ]
+				 -> [ state := state addQueenBlack: aMyChessSquare ]).
+				([ 'addOn' ] -> [ state := state addQueenWhite: aMyChessSquare ]) }
+		otherwise: [ state := state clickOn: aMyChessSquare ]
 ]
 
 { #category : 'event handling' }

@@ -128,9 +128,13 @@ MyChessGame >> addQueenColor [
 	self addChild: editorPane.
 	editorPane addChild: buttonQueenBlack.
 	editorPane addChild: buttonQueenWhite.
-	
-	buttonQueenBlack whenClickedDo: [ self switchToAddQueenBlackMode ].
-	buttonQueenWhite whenClickedDo: [ self switchToAddMode ].
+
+	buttonQueenBlack whenClickedDo: [
+		self initFile.
+		self switchToAddQueenBlackMode ].
+	buttonQueenWhite whenClickedDo: [
+		self initFile.
+		self switchToAddMode ].
 
 	^ self
 ]
@@ -204,44 +208,12 @@ MyChessGame >> editor [
 ]
 
 { #category : 'as yet unclassified' }
-MyChessGame >> initFileAddQB [
+MyChessGame >> initFile [
 
 	| fileAdd |
-	"data file add QW"
-	fileAdd := FileSystem workingDirectory / 'modeQBAdd.txt'.
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
 	fileAdd exists ifTrue: [ fileAdd delete ].
 	fileAdd writeStreamDo: [ :stream | "just create file" ]
-]
-
-{ #category : 'as yet unclassified' }
-MyChessGame >> initFileAddQW [
-	|fileAdd|
-	"data file add QW"
-	fileAdd := FileSystem workingDirectory / 'modeAdd.txt'.
-	fileAdd exists ifTrue: [ fileAdd delete ].
-	fileAdd writeStreamDo: [ :stream | "just create file" ].
-]
-
-{ #category : 'as yet unclassified' }
-MyChessGame >> initFileDelete [
-
-	|fileDelete|
-	"data file delete"
-	fileDelete := FileSystem workingDirectory / 'modeDelete.txt'.
-	fileDelete exists ifTrue: [ fileDelete delete ].
-	fileDelete writeStreamDo: [ :stream | "just create file" ].
-
-	
-]
-
-{ #category : 'as yet unclassified' }
-MyChessGame >> initFileEdit [
-	"data file edit"
-
-	| fileEdit |
-	fileEdit := FileSystem workingDirectory / 'modeEdit.txt'.
-	fileEdit exists ifTrue: [ fileEdit delete ].
-	fileEdit writeStreamDo: [ :stream | "just create file" ]
 ]
 
 { #category : 'initialization' }
@@ -275,39 +247,8 @@ MyChessGame >> initializeFonts [
 { #category : 'initialization' }
 MyChessGame >> initializeFromFENGame: aFENGame [
 
-	| button buttonEditor infoPane fileDelete fileEdit fileAdd word |
-	
-	"data file delete"
-	"
-	fileDelete := FileSystem workingDirectory / 'modeDelete.txt'.
-	fileDelete exists ifTrue: [ fileDelete delete ].
-	fileDelete writeStreamDo: [ :stream |  ]."
-	
-	self initFileDelete.
-
-	"data file edit"
-	"
-	fileEdit := FileSystem workingDirectory / 'modeEdit.txt'.
-	fileEdit exists ifTrue: [ fileEdit delete ].
-	fileEdit writeStreamDo: [ :stream |]."
-	self initFileEdit. 
-	
-	"data file add QW"
-	"
-	fileAdd := FileSystem workingDirectory / 'modeAdd.txt'.
-	fileAdd exists ifTrue: [ fileAdd delete ].
-	fileAdd writeStreamDo: [ :stream | ]."
-	self initFileAddQW.
-	
-	
-	
-	"data file add QB"
-	"
-	fileAdd := FileSystem workingDirectory / 'modeQBAdd.txt'.
-	fileAdd exists ifTrue: [ fileAdd delete ].
-	fileAdd writeStreamDo: [ :stream | ].
-	"
-	self initFileAddQW.
+	| button buttonEditor infoPane|
+	self initFile.
 
 	"normal"
 	aFENGame sideToMove = 'White'
@@ -428,7 +369,7 @@ MyChessGame >> switchToAddMode [
 	textData := 'addOn'.
 
 	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'modeAdd.txt'.
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
 	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
 ]
 
@@ -440,7 +381,7 @@ MyChessGame >> switchToAddQueenBlackMode [
 	textData := 'addQueenBlackOn'.
 
 	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'modeQBAdd.txt'.
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
 	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
 ]
 
@@ -452,7 +393,7 @@ MyChessGame >> switchToDeleteMode [
 	textData := 'deleteOn'.
 
 	"Open and edit file"
-	file := FileSystem workingDirectory / 'modeDelete.txt'.
+	file := FileSystem workingDirectory / 'mode.txt'.
 	file writeStreamDo: [ :stream | stream nextPutAll: textData ]
 ]
 
@@ -464,6 +405,6 @@ MyChessGame >> switchToEditorMode [
 	textData := 'editOn'.
 
 	"Open and edit file"
-	file := FileSystem workingDirectory / 'modeEdit.txt'.
+	file := FileSystem workingDirectory / 'mode.txt'.
 	file writeStreamDo: [ :stream | stream nextPutAll: textData ]
 ]
