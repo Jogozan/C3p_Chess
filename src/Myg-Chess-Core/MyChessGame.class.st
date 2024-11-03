@@ -67,19 +67,31 @@ MyChessGame >> activity: piece to: square [
 { #category : 'delete' }
 MyChessGame >> add [
 
-	| buttonBishop buttonKnight buttonPawn buttonQueen buttonQueenWhite buttonRook editorPane |
-	buttonBishop := ToButton new.
-	buttonBishop labelText: 'Bishop'.
-	buttonKnight := ToButton new.
-	buttonKnight labelText: 'Knight'.
-	buttonPawn := ToButton new.
-	buttonPawn labelText: 'Pawn'.
-	buttonQueen := ToButton new.
-	buttonQueen labelText: 'Queen'.
-	buttonRook := ToButton new.
-	buttonRook labelText: 'Rook'.
-	buttonQueenWhite := ToButton new.
-	buttonQueenWhite labelText: 'QueenWhite'.
+	| buttonBw buttonBb buttonQw buttonQb buttonKw buttonKb buttonPw buttonPb buttonRw buttonRb buttonKingW buttonKingB editorPaneBishop editorPaneQueen editorPaneKnight editorPanePawn editorPaneRook editorPaneKing editorPane |
+	buttonBw := ToButton new.
+	buttonBw labelText: 'Bishop White'.
+	buttonBb := ToButton new.
+	buttonBb labelText: 'Bishop Black'.
+	buttonQw := ToButton new.
+	buttonQw labelText: 'Queen White'.
+	buttonQb := ToButton new.
+	buttonQb labelText: 'Queen Black'.
+	buttonKb := ToButton new.
+	buttonKb labelText: 'Knight Black'.
+	buttonKw := ToButton new.
+	buttonKw labelText: 'Knight White'.
+	buttonPb := ToButton new.
+	buttonPb labelText: 'Pawn Black'.
+	buttonPw := ToButton new.
+	buttonPw labelText: 'Pawn White'.
+	buttonRw := ToButton new.
+	buttonRw labelText: 'Rook White'.
+	buttonRb := ToButton new.
+	buttonRb labelText: 'Rook Black'.
+	buttonKingW := ToButton new.
+	buttonKingW labelText: 'King White'.
+	buttonKingB := ToButton new.
+	buttonKingB labelText: 'King Black'.
 
 	editorPane := ToElement new.
 	editorPane constraintsDo: [ :c |
@@ -90,51 +102,134 @@ MyChessGame >> add [
 	editorPane margin: (BlInsets all: 20).
 	editorPane matchParent.
 
-	self addChild: editorPane.
-	editorPane addChild: buttonBishop.
-	editorPane addChild: buttonKnight.
-	editorPane addChild: buttonPawn.
-	editorPane addChild: buttonQueen.
-	editorPane addChild: buttonRook.
-	
-	"buttonQueen whenClickedDo: [ self switchToAddMode ]."
-	buttonQueen whenClickedDo: [ self addQueenColor ].
-	
-	buttonPawn whenClickedDo: [ self switchToAddMode ].
-
-
-	^ self
-]
-
-{ #category : 'adding' }
-MyChessGame >> addQueenColor [
-
-	| buttonQueenBlack buttonQueenWhite editorPane |
-	buttonQueenBlack := ToButton new.
-	buttonQueenBlack labelText: 'QueenBlack'.
-	buttonQueenWhite := ToButton new.
-	buttonQueenWhite labelText: 'QueenWhite'.
-
-	editorPane := ToElement new.
-	editorPane constraintsDo: [ :c |
+	editorPaneBishop := ToElement new.
+	editorPaneBishop constraintsDo: [ :c |
 		c vertical fitContent.
 		c horizontal matchParent ].
-	editorPane layout: BlLinearLayout vertical.
-	editorPane layout cellSpacing: 10.
-	editorPane margin: (BlInsets all: 20).
-	editorPane matchParent.
+	editorPaneBishop layout: BlLinearLayout horizontal.
+	editorPaneBishop layout cellSpacing: 10.
+	editorPaneBishop margin: (BlInsets all: 10).
 
+	editorPaneQueen := ToElement new.
+	editorPaneQueen constraintsDo: [ :c |
+		c vertical fitContent.
+		c horizontal matchParent ].
+	editorPaneQueen layout: BlLinearLayout horizontal.
+	editorPaneQueen layout cellSpacing: 10.
+	editorPaneQueen margin: (BlInsets all: 10).
+
+	editorPaneKnight := ToElement new.
+	editorPaneKnight constraintsDo: [ :c |
+		c vertical fitContent.
+		c horizontal matchParent ].
+	editorPaneKnight layout: BlLinearLayout horizontal.
+	editorPaneKnight layout cellSpacing: 10.
+	editorPaneKnight margin: (BlInsets all: 10).
+
+	editorPanePawn := ToElement new.
+	editorPanePawn constraintsDo: [ :c |
+		c vertical fitContent.
+		c horizontal matchParent ].
+	editorPanePawn layout: BlLinearLayout horizontal.
+	editorPanePawn layout cellSpacing: 10.
+	editorPanePawn margin: (BlInsets all: 10).
+
+	editorPaneRook := ToElement new.
+	editorPaneRook constraintsDo: [ :c |
+		c vertical fitContent.
+		c horizontal matchParent ].
+	editorPaneRook layout: BlLinearLayout horizontal.
+	editorPaneRook layout cellSpacing: 10.
+	editorPaneRook margin: (BlInsets all: 10).
+
+	editorPaneKing := ToElement new.
+	editorPaneKing constraintsDo: [ :c |
+		c vertical fitContent.
+		c horizontal matchParent ].
+	editorPaneKing layout: BlLinearLayout horizontal.
+	editorPaneKing layout cellSpacing: 10.
+	editorPaneKing margin: (BlInsets all: 10).
 
 	self addChild: editorPane.
-	editorPane addChild: buttonQueenBlack.
-	editorPane addChild: buttonQueenWhite.
 
-	buttonQueenBlack whenClickedDo: [
+	editorPane addChild: editorPaneBishop.
+	editorPane addChild: editorPaneQueen.
+	editorPane addChild: editorPaneKnight.
+	editorPane addChild: editorPanePawn.
+	editorPane addChild: editorPaneRook.
+	editorPane addChild: editorPaneKing.
+	editorPane background: Color green.
+	editorPaneBishop background: Color yellow.
+	editorPaneQueen background: Color yellow.
+	editorPaneKnight background: Color yellow.
+	editorPanePawn background: Color yellow.
+	editorPaneRook background: Color yellow.
+	editorPaneKing background: Color yellow.
+
+	editorPaneBishop addChild: buttonBb.
+	editorPaneBishop addChild: buttonBw.
+
+	editorPaneQueen addChild: buttonQb.
+	editorPaneQueen addChild: buttonQw.
+
+	editorPaneKnight addChild: buttonKb.
+	editorPaneKnight addChild: buttonKw.
+
+	editorPanePawn addChild: buttonPb.
+	editorPanePawn addChild: buttonPw.
+
+	editorPaneRook addChild: buttonRb.
+	editorPaneRook addChild: buttonRw.
+
+	editorPaneKing addChild: buttonKingB.
+	editorPaneKing addChild: buttonKingW.
+
+	buttonQb whenClickedDo: [
 		self initFile.
 		self switchToAddQueenBlackMode ].
-	buttonQueenWhite whenClickedDo: [
+	buttonQw whenClickedDo: [
 		self initFile.
 		self switchToAddMode ].
+
+	buttonPb whenClickedDo: [
+		self initFile.
+		self switchToAddPawnBlackMode ].
+
+	buttonPw whenClickedDo: [
+		self initFile.
+		self switchToAddPawnWhiteMode ].
+
+	buttonBb whenClickedDo: [
+		self initFile.
+		self switchToAddBishopBlackMode ].
+
+	buttonBw whenClickedDo: [
+		self initFile.
+		self switchToAddBishopWhiteMode ].
+
+	buttonKb whenClickedDo: [
+		self initFile.
+		self switchToAddKnightBlackMode ].
+
+	buttonKw whenClickedDo: [
+		self initFile.
+		self switchToAddKnightWhiteMode ].
+
+	buttonRw whenClickedDo: [
+		self initFile.
+		self switchToAddRookWhiteMode ].
+
+	buttonRb whenClickedDo: [
+		self initFile.
+		self switchToAddRookBlackMode ].
+
+	buttonKingW whenClickedDo: [
+		self initFile.
+		self switchToAddKingWhiteMode ].
+
+	buttonKingB whenClickedDo: [
+		self initFile.
+		self switchToAddKingBlackMode ].
 
 	^ self
 ]
@@ -144,17 +239,9 @@ MyChessGame >> cancel [
 	"canceling the delete mode"
 
 	| file |
-	file := FileSystem workingDirectory / 'modeDelete.txt'.
+	file := FileSystem workingDirectory / 'mode.txt'.
 	file exists ifTrue: [ file delete ].
 	file writeStreamDo: [ :stream | "just create file" ]
-]
-
-{ #category : 'modification' }
-MyChessGame >> changingRole [
-	"Modification state Role"
-	| doChange |
-	doChange := false. 
-	doChange := doChange not.
 ]
 
 { #category : 'playing' }
@@ -167,17 +254,13 @@ MyChessGame >> checkForMate [
 { #category : 'delete' }
 MyChessGame >> editor [
 
-	| buttonDelete buttonFinsish buttonRole buttonAdd buttonCancel editorPane |
+	| buttonDelete buttonAdd buttonCancel editorPane |
 	buttonDelete := ToButton new.
 	buttonDelete labelText: 'Delete!'.
-	buttonFinsish := ToButton new.
-	buttonFinsish labelText: 'Finish!'.
-	buttonRole := ToButton new.
-	buttonRole labelText: 'Change Role'.
 	buttonAdd := ToButton new.
 	buttonAdd labelText: 'Add piece'.
 	buttonCancel := ToButton new.
-	buttonCancel labelText: 'Cancel Delete'.
+	buttonCancel labelText: 'Exit Edit'.
 
 	editorPane := ToElement new.
 	editorPane constraintsDo: [ :c |
@@ -187,22 +270,16 @@ MyChessGame >> editor [
 	editorPane layout cellSpacing: 10.
 	editorPane margin: (BlInsets all: 20).
 	editorPane matchParent.
+	editorPane background: Color red.
 
 	self addChild: editorPane.
 	editorPane addChild: buttonDelete.
-	editorPane addChild: buttonFinsish.
-	editorPane addChild: buttonRole.
 	editorPane addChild: buttonAdd.
 	editorPane addChild: buttonCancel.
 
 	buttonDelete whenClickedDo: [ self switchToDeleteMode ].
-	buttonRole whenClickedDo: [ self changingRole ].
-	buttonAdd whenClickedDo: [ 
-		self add ].
-
-
-	"appel method cancel with button"
 	buttonCancel whenClickedDo: [ self cancel ].
+	buttonAdd whenClickedDo: [ self add ].
 
 	^ self
 ]
@@ -267,7 +344,7 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	infoPane := ToElement new.
 	infoPane constraintsDo: [ :c |
 		c vertical fitContent.
-		c horizontal matchParent ].
+	 ].
 	infoPane layout: BlLinearLayout vertical.
 	infoPane layout cellSpacing: 10.
 	infoPane margin: (BlInsets all: 20).
@@ -281,20 +358,8 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	infoPane addChild: movesLabel.
 	infoPane addChild: button.
 	infoPane addChild: buttonEditor.
-
 	button whenClickedDo: [ self play ].
 	buttonEditor whenClickedDo: [ self editor ].
-
-	"switch to editMode"
-	"
-	buttonEditor whenClickedDo: [ self switchToEditorMode ].
-	word := fileEdit readStreamDo: [ :stream | stream contents trimBoth ].
-	word = 'editOn'
-		ifTrue: [
-			infoPane removeChild: button.
-			self editor ]
-		ifFalse: [ button ifNil: [ infoPane addChild: button ] ].
-	"
 
 	self layout: BlLinearLayout horizontal.
 	self constraintsDo: [ :aLayoutConstraints |
@@ -318,6 +383,7 @@ MyChessGame >> pieces [
 { #category : 'playing' }
 MyChessGame >> play [
 
+	self initFile.
 	currentPlayer play.
 	currentPlayer = whitePlayer
 		ifTrue: [ currentPlayer := blackPlayer ]
@@ -362,6 +428,78 @@ MyChessGame >> removePieceAt: square [
 ]
 
 { #category : 'as yet unclassified' }
+MyChessGame >> switchToAddBishopBlackMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addBbOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToAddBishopWhiteMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addBwOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToAddKingBlackMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addKibOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToAddKingWhiteMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addKiwOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToAddKnightBlackMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addKbOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToAddKnightWhiteMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addKwOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
 MyChessGame >> switchToAddMode [
 
 	| fileAdd textData |
@@ -374,11 +512,59 @@ MyChessGame >> switchToAddMode [
 ]
 
 { #category : 'as yet unclassified' }
+MyChessGame >> switchToAddPawnBlackMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addPbOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToAddPawnWhiteMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addPwOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
 MyChessGame >> switchToAddQueenBlackMode [
 
 	| fileAdd textData |
 	"Definition of mode"
 	textData := 'addQueenBlackOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToAddRookBlackMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addRbOn'.
+
+	"Open and edit file"
+	fileAdd := FileSystem workingDirectory / 'mode.txt'.
+	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToAddRookWhiteMode [
+
+	| fileAdd textData |
+	"Definition of mode"
+	textData := 'addRwOn'.
 
 	"Open and edit file"
 	fileAdd := FileSystem workingDirectory / 'mode.txt'.

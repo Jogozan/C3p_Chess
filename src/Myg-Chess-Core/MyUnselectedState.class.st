@@ -17,6 +17,85 @@ MyUnselectedState class >> board: aBoard [
 ]
 
 { #category : 'events' }
+MyUnselectedState >> addBishopBlack: aMyChessSquare [
+
+	| piece |
+	piece:= MyBishop black.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
+	
+
+	
+]
+
+{ #category : 'events' }
+MyUnselectedState >> addBishopWhite: aMyChessSquare [
+
+	| piece |
+	piece:= MyBishop white.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
+	
+	
+]
+
+{ #category : 'events' }
+MyUnselectedState >> addKingBlack: aMyChessSquare [
+
+	| piece |
+	piece := MyKing black.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
+]
+
+{ #category : 'events' }
+MyUnselectedState >> addKingWhite: aMyChessSquare [
+
+	| piece |
+	piece := MyKing white.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
+]
+
+{ #category : 'events' }
+MyUnselectedState >> addKnightBlack: aMyChessSquare [
+
+	| piece |
+	piece := MyKnight black.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
+]
+
+{ #category : 'events' }
+MyUnselectedState >> addKnightWhite: aMyChessSquare [
+
+	| piece |
+	piece := MyKnight white.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
+]
+
+{ #category : 'events' }
+MyUnselectedState >> addPawnBlack: aMyChessSquare [
+
+	| piece |
+	piece := MyPawn black.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
+]
+
+{ #category : 'events' }
+MyUnselectedState >> addPawnWhite: aMyChessSquare [
+
+	| piece |
+	piece:= MyPawn white.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
+	
+	
+]
+
+{ #category : 'events' }
 MyUnselectedState >> addQueen: aMyChessSquare [
 
 	aMyChessSquare contents: MyQueen white
@@ -25,13 +104,37 @@ MyUnselectedState >> addQueen: aMyChessSquare [
 { #category : 'events' }
 MyUnselectedState >> addQueenBlack: aMyChessSquare [
 
-	aMyChessSquare contents: MyQueen black
+	| piece |
+	piece := MyQueen black.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
 ]
 
 { #category : 'events' }
 MyUnselectedState >> addQueenWhite: aMyChessSquare [
 
-	aMyChessSquare contents: MyQueen white
+	| piece |
+	piece := MyQueen white.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
+]
+
+{ #category : 'events' }
+MyUnselectedState >> addRookBlack: aMyChessSquare [
+
+	| piece |
+	piece := MyRook black.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
+]
+
+{ #category : 'events' }
+MyUnselectedState >> addRookWhite: aMyChessSquare [
+
+	| piece |
+	piece := MyRook white.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
 ]
 
 { #category : 'accessing' }

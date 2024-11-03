@@ -121,19 +121,6 @@ MyChessSquare >> contents: aPiece [
 			 fontName: MyOpenChessDownloadedFont new familyName)
 ]
 
-{ #category : 'submorphs - add/remove' }
-MyChessSquare >> delete [
-
-	self border: Color red
-	
-]
-
-{ #category : 'deleting' }
-MyChessSquare >> deletePiece [
-	"More logic than game"
-	self contents: nil.
-]
-
 { #category : 'api - configuration' }
 MyChessSquare >> down [
 
@@ -177,8 +164,8 @@ MyChessSquare >> initialize [
 
 	super initialize.
 	target := BlElement new
-		  geometry: BlCircleGeometry new;
-		  background: (Color gray alpha: 0.3).
+		          geometry: BlCircleGeometry new;
+		          background: (Color gray alpha: 0.3).
 
 	self layout: BlFrameLayout new.
 
@@ -261,7 +248,8 @@ MyChessSquare >> renderKing: aPiece [
 MyChessSquare >> renderKnight: aPiece [
 
 	^ aPiece isWhite
-		  ifFalse: [ color isBlack
+		  ifFalse: [
+			  color isBlack
 				  ifFalse: [ 'M' ]
 				  ifTrue: [ 'm' ] ]
 		  ifTrue: [
