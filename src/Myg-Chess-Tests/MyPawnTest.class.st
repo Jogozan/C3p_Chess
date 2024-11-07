@@ -3,7 +3,6 @@ Class {
 	#superclass : 'TestCase',
 	#instVars : [
 		'board',
-		'pawn',
 		'whitePawn',
 		'blackPawn'
 	],
@@ -26,7 +25,7 @@ MyPawnTest >> setUp [
 MyPawnTest >> testBlackPawnShouldNotPromote [
 
 	|  promotedBlack |
-	board at: 'e2' put: blackPawn.
+	board at: 'e4' put: blackPawn.
 	promotedBlack := blackPawn canPromote.
 	self deny: promotedBlack
 ]
@@ -34,10 +33,10 @@ MyPawnTest >> testBlackPawnShouldNotPromote [
 { #category : 'tests' }
 MyPawnTest >> testBlackPawnShouldPromote [
 
-	| blackPawn  promotedBlack |
+	| promotedBlack |
 
 	blackPawn := MyPawn black.
-	board at: 'e1' put: blackPawn.
+	board at: 'e2' put: blackPawn.
 	promotedBlack := blackPawn canPromote.
 	self assert: promotedBlack
 ]
@@ -48,11 +47,11 @@ MyPawnTest >> testPawnPromotion [
 	| promotionSquare promotedPiece |
 	board initialize.
 	promotionSquare := board at: 'a8'.
-	board at: 'a7' put: pawn.
+	board at: 'a7' put: whitePawn.
 
-	pawn moveTo: promotionSquare.
+	whitePawn moveTo: promotionSquare.
 
-	promotedPiece := pawn promoteTo: MyQueen.
+	promotedPiece := whitePawn promoteTo: MyQueen.
 
 	self assert: (promotedPiece isKindOf: MyQueen).
 	self assert: promotionSquare contents equals: promotedPiece
@@ -72,7 +71,7 @@ MyPawnTest >> testWhitePawnShouldNotPromote [
 MyPawnTest >> testWhitePawnShouldPromote [
 
 	| promotedWhite |
-	board at: 'e8' put: whitePawn.
+	board at: 'e7' put: whitePawn.
 	promotedWhite := whitePawn canPromote.
 	self assert: promotedWhite
 ]

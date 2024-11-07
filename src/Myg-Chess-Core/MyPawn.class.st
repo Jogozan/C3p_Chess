@@ -1,9 +1,24 @@
 Class {
 	#name : 'MyPawn',
 	#superclass : 'MyPiece',
+	#instVars : [
+		'window'
+	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
 }
+
+{ #category : 'adding' }
+MyPawn >> addPromotionButton: label on: piece toPane: pane [
+    | button |
+    button := ToButton new.
+    button whenClickedDo: [
+        self promoteTo: piece.
+        window close.
+    ].
+    button labelText: label.
+    pane addChild: button.
+]
 
 { #category : 'testing' }
 MyPawn >> canPromote [
@@ -30,25 +45,15 @@ MyPawn >> promoteTo: aPieceClass [
 { #category : 'as yet unclassified' }
 MyPawn >> promoteWindow [
 
-	| window rook queen bishop knight pane|
+	| pane |
 	pane := ToPane vertical.
 	window := BlSpace new.
-	knight := ToButton new.
-	knight whenClickedDo:[self promoteTo: MyKnight new ].
-	knight labelText: 'chevalier'.
-	queen := ToButton new.
-	queen whenClickedDo:[self promoteTo: MyQueen new ].
-	queen labelText: 'chevalier'.
-	rook := ToButton new.
-	rook whenClickedDo:[self promoteTo: MyRook new ].
-	rook labelText: 'chevalier'.
-	bishop := ToButton new.
-	bishop whenClickedDo:[self promoteTo: MyBishop new ].
-	bishop labelText: 'chevalier'.
-	pane addChild: knight.
-	pane addChild: bishop.
-	pane addChild: rook.
-	pane addChild: queen.
+
+	self addPromotionButton: 'Knight' on: MyKnight new toPane: pane.
+	self addPromotionButton: 'Queen' on: MyQueen new toPane: pane.
+	self addPromotionButton: 'Rook' on: MyRook new toPane: pane.
+	self addPromotionButton: 'Bishop' on: MyBishop new toPane: pane.
+
 	window root addChild: pane.
 	window show
 ]
