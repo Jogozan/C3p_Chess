@@ -137,6 +137,15 @@ MyUnselectedState >> addRookWhite: aMyChessSquare [
 	piece square: aMyChessSquare
 ]
 
+{ #category : 'events' }
+MyUnselectedState >> addingPiece: aMyChessSquare [
+
+	| piece |
+	piece := MyKing black.
+	aMyChessSquare contents: piece.
+	piece square: aMyChessSquare
+]
+
 { #category : 'accessing' }
 MyUnselectedState >> board [
 
