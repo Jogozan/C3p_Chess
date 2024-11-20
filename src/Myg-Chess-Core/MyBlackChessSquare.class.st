@@ -1,18 +1,18 @@
 Class {
-	#name : 'MyChessBlackSquare',
+	#name : 'MyBlackChessSquare',
 	#superclass : 'MyChessSquare',
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
 }
 
 { #category : 'accessing' }
-MyChessBlackSquare >> foreground [
+MyBlackChessSquare >> foreground [
 			
 	^ board blackColor
 ]
 
 { #category : 'rendering' }
-MyChessBlackSquare >> renderBishop: aPiece [
+MyBlackChessSquare >> renderBishop: aPiece [
  
     ^ aPiece isWhite
         ifTrue: [ 'b' ]
@@ -20,7 +20,7 @@ MyChessBlackSquare >> renderBishop: aPiece [
 ]
 
 { #category : 'rendering' }
-MyChessBlackSquare >> renderKing: aPiece [
+MyBlackChessSquare >> renderKing: aPiece [
 
     ^ aPiece isWhite
         ifTrue: [ 'k' ]
@@ -28,7 +28,7 @@ MyChessBlackSquare >> renderKing: aPiece [
 ]
 
 { #category : 'rendering' }
-MyChessBlackSquare >> renderKnight: aPiece [
+MyBlackChessSquare >> renderKnight: aPiece [
 
 	^ aPiece isWhite
 		  ifFalse: [ 'm' ]
@@ -36,13 +36,13 @@ MyChessBlackSquare >> renderKnight: aPiece [
 ]
 
 { #category : 'accessing' }
-MyChessBlackSquare >> renderOnColor [
+MyBlackChessSquare >> renderOnColor [
     
 	^ 'x'
 ]
 
 { #category : 'rendering' }
-MyChessBlackSquare >> renderPawn: aPiece [
+MyBlackChessSquare >> renderPawn: aPiece [
 
 	^ aPiece isWhite
 		  ifFalse: [ 'o' ]
@@ -50,7 +50,7 @@ MyChessBlackSquare >> renderPawn: aPiece [
 ]
 
 { #category : 'rendering' }
-MyChessBlackSquare >> renderQueen: aPiece [
+MyBlackChessSquare >> renderQueen: aPiece [
 
 	^ aPiece isWhite
 		  ifFalse: [ 'w' ]
@@ -58,7 +58,7 @@ MyChessBlackSquare >> renderQueen: aPiece [
 ]
 
 { #category : 'rendering' }
-MyChessBlackSquare >> renderRook: aPiece [
+MyBlackChessSquare >> renderRook: aPiece [
 
 	^ aPiece isWhite
 		  ifFalse: [ 't' ]
@@ -66,7 +66,7 @@ MyChessBlackSquare >> renderRook: aPiece [
 ]
 
 { #category : 'accessing' }
-MyChessBlackSquare >> textColor [ 
+MyBlackChessSquare >> textColor [ 
 
     ^ Color white
 
