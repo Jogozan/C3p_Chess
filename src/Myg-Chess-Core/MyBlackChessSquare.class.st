@@ -12,27 +12,39 @@ MyBlackChessSquare >> foreground [
 ]
 
 { #category : 'rendering' }
-MyBlackChessSquare >> renderBishop: aPiece [
+MyBlackChessSquare >> renderBlackBishop [
  
-    ^ aPiece isWhite
-        ifTrue: [ 'b' ]
-        ifFalse: [ 'v' ]
+    ^ 'v'
 ]
 
 { #category : 'rendering' }
-MyBlackChessSquare >> renderKing: aPiece [
+MyBlackChessSquare >> renderBlackKing [
 
-    ^ aPiece isWhite
-        ifTrue: [ 'k' ]
-        ifFalse: [ 'l' ]
+    ^ 'l'
 ]
 
 { #category : 'rendering' }
-MyBlackChessSquare >> renderKnight: aPiece [
+MyBlackChessSquare >> renderBlackKnight [
 
-	^ aPiece isWhite
-		  ifFalse: [ 'm' ]
-		  ifTrue: [ 'n' ]
+	^ 'm'
+]
+
+{ #category : 'rendering' }
+MyBlackChessSquare >> renderBlackPawn [
+
+	^ 'o'
+]
+
+{ #category : 'rendering' }
+MyBlackChessSquare >> renderBlackQueen [
+
+	^ 'w'
+]
+
+{ #category : 'rendering' }
+MyBlackChessSquare >> renderBlackRook [
+
+	^ 't'
 ]
 
 { #category : 'accessing' }
@@ -42,27 +54,39 @@ MyBlackChessSquare >> renderOnColor [
 ]
 
 { #category : 'rendering' }
-MyBlackChessSquare >> renderPawn: aPiece [
-
-	^ aPiece isWhite
-		  ifFalse: [ 'o' ]
-		  ifTrue: [ 'p' ]
+MyBlackChessSquare >> renderWhiteBishop [
+ 
+    ^ 'b'
 ]
 
 { #category : 'rendering' }
-MyBlackChessSquare >> renderQueen: aPiece [
+MyBlackChessSquare >> renderWhiteKing [
 
-	^ aPiece isWhite
-		  ifFalse: [ 'w' ]
-		  ifTrue: [ 'q' ]
+    ^ 'k'
 ]
 
 { #category : 'rendering' }
-MyBlackChessSquare >> renderRook: aPiece [
+MyBlackChessSquare >> renderWhiteKnight [
 
-	^ aPiece isWhite
-		  ifFalse: [ 't' ]
-		  ifTrue: [ 'r' ]
+	^ 'n'
+]
+
+{ #category : 'rendering' }
+MyBlackChessSquare >> renderWhitePawn [
+
+	^ 'p'
+]
+
+{ #category : 'rendering' }
+MyBlackChessSquare >> renderWhiteQueen [
+
+	^ 'q'
+]
+
+{ #category : 'rendering' }
+MyBlackChessSquare >> renderWhiteRook [
+
+	^ 'r'
 ]
 
 { #category : 'accessing' }

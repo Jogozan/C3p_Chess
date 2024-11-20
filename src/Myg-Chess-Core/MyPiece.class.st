@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'color',
-		'square'
+		'square',
+		'pieceColor'
 	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
@@ -14,6 +15,7 @@ MyPiece class >> black [
 
 	^ self new
 		  color: Color black;
+		  pieceColor: MyBlackColorPiece new;
 		  yourself
 ]
 
@@ -22,6 +24,7 @@ MyPiece class >> white [
 
 	^ self new
 		  color: Color white;
+		  pieceColor: MyWhiteColorPiece new;
 		  yourself
 ]
 
@@ -169,6 +172,18 @@ MyPiece >> moveTo: aSquare [
 	square emptyContents.
 	square := aSquare.
 	aSquare contents: self
+]
+
+{ #category : 'accessing' }
+MyPiece >> pieceColor [
+
+	^ pieceColor
+]
+
+{ #category : 'accessing' }
+MyPiece >> pieceColor: aPieceColor [
+
+	pieceColor := aPieceColor
 ]
 
 { #category : 'rendering' }
