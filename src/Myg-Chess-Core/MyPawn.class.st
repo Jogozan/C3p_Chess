@@ -2,7 +2,8 @@ Class {
 	#name : 'MyPawn',
 	#superclass : 'MyPiece',
 	#instVars : [
-		'window'
+		'window',
+		'promotionBlock'
 	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
@@ -22,8 +23,10 @@ MyPawn >> addPromotionButton: label on: piece toPane: pane [
 
 { #category : 'testing' }
 MyPawn >> canPromote [
-	^ (self isWhite and: [ square up name endsWith: '8' ]) or: [
-		  self isWhite not and: [ square down name endsWith: '1' ] ]
+
+	^ self isWhite
+		  ifTrue: [ square name endsWith: '8' ]
+		  ifFalse: [ square name endsWith: '1' ]
 ]
 
 { #category : 'accessing' }
@@ -32,30 +35,33 @@ MyPawn >> id [
 	^ 'P'
 ]
 
-{ #category : 'as yet unclassified' }
-MyPawn >> promoteTo: aPieceClass [
-	aPieceClass color: self color.
-	aPieceClass square: square.
-	square contents: aPieceClass.
+{ #category : 'enumerating' }
+MyPawn >> onPromotionDo: aBlock [
 
-	^ aPieceClass
-
+	promotionBlock := aBlock
 ]
 
 { #category : 'as yet unclassified' }
-MyPawn >> promoteWindow [
+MyPawn >> promoteIfNeeded [
 
-	| pane |
-	pane := ToPane vertical.
-	window := BlSpace new.
+	self canPromote ifTrue: [
+		promotionBlock value: self value: {
+				MyQueen.
+				MyKnight.
+				MyRook.
+				MyBishop } ]
+]
 
-	self addPromotionButton: 'Knight' on: MyKnight new toPane: pane.
-	self addPromotionButton: 'Queen' on: MyQueen new toPane: pane.
-	self addPromotionButton: 'Rook' on: MyRook new toPane: pane.
-	self addPromotionButton: 'Bishop' on: MyBishop new toPane: pane.
+{ #category : 'as yet unclassified' }
+MyPawn >> promoteTo: aPieceClass [
 
-	window root addChild: pane.
-	window show
+	| promotedPiece |
+	promotedPiece := aPieceClass new.
+	promotedPiece color: self color.
+	promotedPiece square: square.
+	square contents: promotedPiece.
+
+	^ promotedPiece
 ]
 
 { #category : 'rendering' }

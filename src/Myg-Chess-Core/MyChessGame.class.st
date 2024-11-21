@@ -56,6 +56,13 @@ MyChessGame >> checkForMate [
 	blackPlayer king isCheckMated ifTrue: [ self halt: 'White wins!' ].
 ]
 
+{ #category : 'as yet unclassified' }
+MyChessGame >> configurePromotionFor: aPawn [
+	aPawn onPromotionDo: [ :pawn :options |
+        self showPromotionWindowFor: pawn withOptions: options
+    ].
+]
+
 { #category : 'initialization' }
 MyChessGame >> initialize [
 
@@ -91,7 +98,7 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	aFENGame sideToMove = 'White'
 		ifTrue: [ currentPlayer := whitePlayer ]
 		ifFalse: [ currentPlayer := blackPlayer ].
-		
+
 	moveCount := aFENGame moveCount.
 
 	board := MyChessBoard fromFENBoard: aFENGame board.
@@ -99,16 +106,16 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	button := ToButton new.
 	button labelText: 'Play!'.
 	button whenClickedDo: [ self play ].
-	
+
 	infoPane := ToElement new.
-	infoPane constraintsDo: [ :c | 
-		        c vertical fitContent.
-		        c horizontal matchParent ].
+	infoPane constraintsDo: [ :c |
+		c vertical fitContent.
+		c horizontal matchParent ].
 	infoPane layout: BlLinearLayout vertical.
 	infoPane layout cellSpacing: 10.
 	infoPane margin: (BlInsets all: 20).
 	infoPane matchParent.
-	
+
 	movesLabel := ToLabel new beMultiLine.
 	movesLabel matchParent.
 
@@ -116,6 +123,10 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	self addChild: infoPane.
 	infoPane addChild: movesLabel.
 	infoPane addChild: button.
+
+	board pieces do: [ :piece |
+		(piece isKindOf: MyPawn) ifTrue: [
+			self configurePromotionFor: piece ] ].
 
 	self layout: BlLinearLayout horizontal.
 	self constraintsDo: [ :aLayoutConstraints |
@@ -173,4 +184,24 @@ MyChessGame >> recordMovementOf: aPiece to: aSquare [
 	].
 	
 	movesLabel text: movesText
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> showPromotionWindowFor: aPawn withOptions: options [
+
+	| window pane |
+	pane := ToPane vertical.
+	window := BlSpace new.
+
+	options do: [ :option |
+		| button |
+		button := ToButton new.
+		button labelText: option name.
+		button whenClickedDo: [
+			aPawn promoteTo: option.
+			window close ].
+		pane addChild: button ].
+
+	window root addChild: pane.
+	window show
 ]
