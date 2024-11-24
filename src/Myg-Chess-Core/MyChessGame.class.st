@@ -26,7 +26,8 @@ Class {
 		'moveCountLabel',
 		'moves',
 		'deleteMode',
-		'dsp'
+		'dsp',
+		'state'
 	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
@@ -236,12 +237,9 @@ MyChessGame >> add [
 
 { #category : 'actions' }
 MyChessGame >> cancel [
-	"canceling the delete mode"
-
-	| file |
-	file := FileSystem workingDirectory / 'mode.txt'.
-	file exists ifTrue: [ file delete ].
-	file writeStreamDo: [ :stream | "just create file" ]
+	| textData |
+	textData := ''.
+	self state: textData
 ]
 
 { #category : 'playing' }
@@ -427,28 +425,33 @@ MyChessGame >> removePieceAt: square [
     self at: square put: nil.
 ]
 
+{ #category : 'accessing' }
+MyChessGame >> state [ 
+
+	^ state
+]
+
+{ #category : 'accessing' }
+MyChessGame >> state: aState [
+
+	state := aState
+]
+
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddBishopBlackMode [
 
 	| fileAdd textData |
-	"Definition of mode"
 	textData := 'addBbOn'.
+	self state: textData.
 
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
 ]
 
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddBishopWhiteMode [
 
 	| fileAdd textData |
-	"Definition of mode"
 	textData := 'addBwOn'.
-
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData.
 ]
 
 { #category : 'as yet unclassified' }
@@ -457,22 +460,15 @@ MyChessGame >> switchToAddKingBlackMode [
 	| fileAdd textData |
 	"Definition of mode"
 	textData := 'addKibOn'.
-
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData.
 ]
 
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddKingWhiteMode [
 
 	| fileAdd textData |
-	"Definition of mode"
 	textData := 'addKiwOn'.
-
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData.
 ]
 
 { #category : 'as yet unclassified' }
@@ -481,10 +477,7 @@ MyChessGame >> switchToAddKnightBlackMode [
 	| fileAdd textData |
 	"Definition of mode"
 	textData := 'addKbOn'.
-
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -493,22 +486,15 @@ MyChessGame >> switchToAddKnightWhiteMode [
 	| fileAdd textData |
 	"Definition of mode"
 	textData := 'addKwOn'.
-
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData
 ]
 
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddMode [
 
 	| fileAdd textData |
-	"Definition of mode"
 	textData := 'addOn'.
-
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -517,10 +503,7 @@ MyChessGame >> switchToAddPawnBlackMode [
 	| fileAdd textData |
 	"Definition of mode"
 	textData := 'addPbOn'.
-
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -529,10 +512,7 @@ MyChessGame >> switchToAddPawnWhiteMode [
 	| fileAdd textData |
 	"Definition of mode"
 	textData := 'addPwOn'.
-
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -541,10 +521,7 @@ MyChessGame >> switchToAddQueenBlackMode [
 	| fileAdd textData |
 	"Definition of mode"
 	textData := 'addQueenBlackOn'.
-
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -553,10 +530,7 @@ MyChessGame >> switchToAddRookBlackMode [
 	| fileAdd textData |
 	"Definition of mode"
 	textData := 'addRbOn'.
-
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -565,32 +539,21 @@ MyChessGame >> switchToAddRookWhiteMode [
 	| fileAdd textData |
 	"Definition of mode"
 	textData := 'addRwOn'.
-
-	"Open and edit file"
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData
 ]
 
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToDeleteMode [
 
 	| file textData |
-	"Definition of mode"
 	textData := 'deleteOn'.
-
-	"Open and edit file"
-	file := FileSystem workingDirectory / 'mode.txt'.
-	file writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	self state: textData
 ]
 
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToEditorMode [
 
 	| file textData |
-	"Definition of mode"
-	textData := 'editOn'.
-
-	"Open and edit file"
-	file := FileSystem workingDirectory / 'mode.txt'.
-	file writeStreamDo: [ :stream | stream nextPutAll: textData ]
+	textData := ''.
+	self state: textData
 ]

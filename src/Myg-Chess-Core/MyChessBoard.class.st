@@ -70,11 +70,8 @@ MyChessBoard >> blackColor: anObject [
 { #category : 'event handling' }
 MyChessBoard >> click: aMyChessSquare [
 
-	| fileDelete word |
-	"Ouvrir le fichier et lire le contenu"
-	fileDelete := FileSystem workingDirectory / 'mode.txt'.
-	word := fileDelete readStreamDo: [ :stream |
-		        stream contents trimBoth ].
+	| word |
+	word := game state.
 
 	word
 		caseOf: {
@@ -83,15 +80,19 @@ MyChessBoard >> click: aMyChessSquare [
 				 -> [ state := state addQueenBlack: aMyChessSquare ]).
 				([ 'addPbOn' ] -> [ state := state addPawnBlack: aMyChessSquare ]).
 				([ 'addPwOn' ] -> [ state := state addPawnWhite: aMyChessSquare ]).
-				([ 'addBbOn' ] -> [ state := state addBishopBlack: aMyChessSquare ]).
-				([ 'addBwOn' ] -> [ state := state addBishopWhite: aMyChessSquare ]).
-				([ 'addKwOn' ] -> [ state := state addKnightWhite: aMyChessSquare ]).
-				([ 'addKbOn' ] -> [ state := state addKnightBlack: aMyChessSquare ]).
+				([ 'addBbOn' ]
+				 -> [ state := state addBishopBlack: aMyChessSquare ]).
+				([ 'addBwOn' ]
+				 -> [ state := state addBishopWhite: aMyChessSquare ]).
+				([ 'addKwOn' ]
+				 -> [ state := state addKnightWhite: aMyChessSquare ]).
+				([ 'addKbOn' ]
+				 -> [ state := state addKnightBlack: aMyChessSquare ]).
 				([ 'addRbOn' ] -> [ state := state addRookBlack: aMyChessSquare ]).
 				([ 'addRwOn' ] -> [ state := state addRookWhite: aMyChessSquare ]).
 				([ 'addKiwOn' ] -> [ state := state addKingWhite: aMyChessSquare ]).
 				([ 'addKibOn' ] -> [ state := state addKingBlack: aMyChessSquare ]).
-				([ 'addOn' ] -> [ state := state addQueenWhite: aMyChessSquare ]) }
+				([ 'addOn' ] -> [ state := state addQueenWhite: aMyChessSquare ])}
 		otherwise: [ state := state clickOn: aMyChessSquare ]
 ]
 
@@ -99,6 +100,12 @@ MyChessBoard >> click: aMyChessSquare [
 MyChessBoard >> clickDelete: aMyChessSquare [
 
 	^ state delete: aMyChessSquare
+]
+
+{ #category : 'public' }
+MyChessBoard >> delete: aMyChessSquare [ 
+
+	state delete: aMyChessSquare
 ]
 
 { #category : 'accessing' }
