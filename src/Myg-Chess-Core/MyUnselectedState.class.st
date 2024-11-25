@@ -96,12 +96,6 @@ MyUnselectedState >> addPawnWhite: aMyChessSquare [
 ]
 
 { #category : 'events' }
-MyUnselectedState >> addQueen: aMyChessSquare [
-
-	aMyChessSquare contents: MyQueen white
-]
-
-{ #category : 'events' }
 MyUnselectedState >> addQueenBlack: aMyChessSquare [
 
 	| piece |

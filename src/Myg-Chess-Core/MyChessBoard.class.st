@@ -96,18 +96,6 @@ MyChessBoard >> click: aMyChessSquare [
 		otherwise: [ state := state clickOn: aMyChessSquare ]
 ]
 
-{ #category : 'event handling' }
-MyChessBoard >> clickDelete: aMyChessSquare [
-
-	^ state delete: aMyChessSquare
-]
-
-{ #category : 'public' }
-MyChessBoard >> delete: aMyChessSquare [ 
-
-	state delete: aMyChessSquare
-]
-
 { #category : 'accessing' }
 MyChessBoard >> game [
 

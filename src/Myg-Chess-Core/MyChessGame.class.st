@@ -159,13 +159,13 @@ MyChessGame >> add [
 	editorPane addChild: editorPanePawn.
 	editorPane addChild: editorPaneRook.
 	editorPane addChild: editorPaneKing.
-	editorPane background: Color green.
-	editorPaneBishop background: Color yellow.
-	editorPaneQueen background: Color yellow.
-	editorPaneKnight background: Color yellow.
-	editorPanePawn background: Color yellow.
-	editorPaneRook background: Color yellow.
-	editorPaneKing background: Color yellow.
+	editorPane background: Color gray.
+	editorPaneBishop background: Color veryVeryLightGray.
+	editorPaneQueen background: Color veryVeryLightGray.
+	editorPaneKnight background: Color veryVeryLightGray.
+	editorPanePawn background: Color veryVeryLightGray.
+	editorPaneRook background: Color veryVeryLightGray.
+	editorPaneKing background: Color veryVeryLightGray.
 
 	editorPaneBishop addChild: buttonBb.
 	editorPaneBishop addChild: buttonBw.
@@ -185,52 +185,18 @@ MyChessGame >> add [
 	editorPaneKing addChild: buttonKingB.
 	editorPaneKing addChild: buttonKingW.
 
-	buttonQb whenClickedDo: [
-		self initFile.
-		self switchToAddQueenBlackMode ].
-	buttonQw whenClickedDo: [
-		self initFile.
-		self switchToAddMode ].
-
-	buttonPb whenClickedDo: [
-		self initFile.
-		self switchToAddPawnBlackMode ].
-
-	buttonPw whenClickedDo: [
-		self initFile.
-		self switchToAddPawnWhiteMode ].
-
-	buttonBb whenClickedDo: [
-		self initFile.
-		self switchToAddBishopBlackMode ].
-
-	buttonBw whenClickedDo: [
-		self initFile.
-		self switchToAddBishopWhiteMode ].
-
-	buttonKb whenClickedDo: [
-		self initFile.
-		self switchToAddKnightBlackMode ].
-
-	buttonKw whenClickedDo: [
-		self initFile.
-		self switchToAddKnightWhiteMode ].
-
-	buttonRw whenClickedDo: [
-		self initFile.
-		self switchToAddRookWhiteMode ].
-
-	buttonRb whenClickedDo: [
-		self initFile.
-		self switchToAddRookBlackMode ].
-
-	buttonKingW whenClickedDo: [
-		self initFile.
-		self switchToAddKingWhiteMode ].
-
-	buttonKingB whenClickedDo: [
-		self initFile.
-		self switchToAddKingBlackMode ].
+	buttonQb whenClickedDo: [ self switchToAddQueenBlackMode ].
+	buttonQw whenClickedDo: [ self switchToAddMode ].
+	buttonPb whenClickedDo: [ self switchToAddPawnBlackMode ].
+	buttonPw whenClickedDo: [ self switchToAddPawnWhiteMode ].
+	buttonBb whenClickedDo: [ self switchToAddBishopBlackMode ].
+	buttonBw whenClickedDo: [ self switchToAddBishopWhiteMode ].
+	buttonKb whenClickedDo: [ self switchToAddKnightBlackMode ].
+	buttonKw whenClickedDo: [ self switchToAddKnightWhiteMode ].
+	buttonRw whenClickedDo: [ self switchToAddRookWhiteMode ].
+	buttonRb whenClickedDo: [ self switchToAddRookBlackMode ].
+	buttonKingW whenClickedDo: [ self switchToAddKingWhiteMode ].
+	buttonKingB whenClickedDo: [ self switchToAddKingBlackMode ].
 
 	^ self
 ]
@@ -268,7 +234,7 @@ MyChessGame >> editor [
 	editorPane layout cellSpacing: 10.
 	editorPane margin: (BlInsets all: 20).
 	editorPane matchParent.
-	editorPane background: Color red.
+	editorPane background: Color gray.
 
 	self addChild: editorPane.
 	editorPane addChild: buttonDelete.
@@ -280,15 +246,6 @@ MyChessGame >> editor [
 	buttonAdd whenClickedDo: [ self add ].
 
 	^ self
-]
-
-{ #category : 'as yet unclassified' }
-MyChessGame >> initFile [
-
-	| fileAdd |
-	fileAdd := FileSystem workingDirectory / 'mode.txt'.
-	fileAdd exists ifTrue: [ fileAdd delete ].
-	fileAdd writeStreamDo: [ :stream | "just create file" ]
 ]
 
 { #category : 'initialization' }
@@ -322,10 +279,7 @@ MyChessGame >> initializeFonts [
 { #category : 'initialization' }
 MyChessGame >> initializeFromFENGame: aFENGame [
 
-	| button buttonEditor infoPane|
-	self initFile.
-
-	"normal"
+	| button buttonEditor infoPane |
 	aFENGame sideToMove = 'White'
 		ifTrue: [ currentPlayer := whitePlayer ]
 		ifFalse: [ currentPlayer := blackPlayer ].
@@ -340,9 +294,7 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	buttonEditor labelText: 'Editor !'.
 
 	infoPane := ToElement new.
-	infoPane constraintsDo: [ :c |
-		c vertical fitContent.
-	 ].
+	infoPane constraintsDo: [ :c | c vertical fitContent ].
 	infoPane layout: BlLinearLayout vertical.
 	infoPane layout cellSpacing: 10.
 	infoPane margin: (BlInsets all: 20).
@@ -440,7 +392,7 @@ MyChessGame >> state: aState [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddBishopBlackMode [
 
-	| fileAdd textData |
+	| textData |
 	textData := 'addBbOn'.
 	self state: textData.
 
@@ -449,7 +401,7 @@ MyChessGame >> switchToAddBishopBlackMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddBishopWhiteMode [
 
-	| fileAdd textData |
+	| textData |
 	textData := 'addBwOn'.
 	self state: textData.
 ]
@@ -457,8 +409,7 @@ MyChessGame >> switchToAddBishopWhiteMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddKingBlackMode [
 
-	| fileAdd textData |
-	"Definition of mode"
+	| textData |
 	textData := 'addKibOn'.
 	self state: textData.
 ]
@@ -466,7 +417,7 @@ MyChessGame >> switchToAddKingBlackMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddKingWhiteMode [
 
-	| fileAdd textData |
+	| textData |
 	textData := 'addKiwOn'.
 	self state: textData.
 ]
@@ -474,8 +425,7 @@ MyChessGame >> switchToAddKingWhiteMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddKnightBlackMode [
 
-	| fileAdd textData |
-	"Definition of mode"
+	| textData |
 	textData := 'addKbOn'.
 	self state: textData
 ]
@@ -483,8 +433,7 @@ MyChessGame >> switchToAddKnightBlackMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddKnightWhiteMode [
 
-	| fileAdd textData |
-	"Definition of mode"
+	| textData |
 	textData := 'addKwOn'.
 	self state: textData
 ]
@@ -492,7 +441,7 @@ MyChessGame >> switchToAddKnightWhiteMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddMode [
 
-	| fileAdd textData |
+	| textData |
 	textData := 'addOn'.
 	self state: textData
 ]
@@ -500,8 +449,7 @@ MyChessGame >> switchToAddMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddPawnBlackMode [
 
-	| fileAdd textData |
-	"Definition of mode"
+	| textData |
 	textData := 'addPbOn'.
 	self state: textData
 ]
@@ -509,8 +457,7 @@ MyChessGame >> switchToAddPawnBlackMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddPawnWhiteMode [
 
-	| fileAdd textData |
-	"Definition of mode"
+	| textData |
 	textData := 'addPwOn'.
 	self state: textData
 ]
@@ -518,8 +465,7 @@ MyChessGame >> switchToAddPawnWhiteMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddQueenBlackMode [
 
-	| fileAdd textData |
-	"Definition of mode"
+	| textData |
 	textData := 'addQueenBlackOn'.
 	self state: textData
 ]
@@ -527,8 +473,7 @@ MyChessGame >> switchToAddQueenBlackMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddRookBlackMode [
 
-	| fileAdd textData |
-	"Definition of mode"
+	| textData |
 	textData := 'addRbOn'.
 	self state: textData
 ]
@@ -536,8 +481,7 @@ MyChessGame >> switchToAddRookBlackMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddRookWhiteMode [
 
-	| fileAdd textData |
-	"Definition of mode"
+	| textData |
 	textData := 'addRwOn'.
 	self state: textData
 ]
@@ -545,15 +489,7 @@ MyChessGame >> switchToAddRookWhiteMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToDeleteMode [
 
-	| file textData |
+	| textData |
 	textData := 'deleteOn'.
-	self state: textData
-]
-
-{ #category : 'as yet unclassified' }
-MyChessGame >> switchToEditorMode [
-
-	| file textData |
-	textData := ''.
 	self state: textData
 ]
