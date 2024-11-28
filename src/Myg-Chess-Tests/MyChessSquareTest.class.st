@@ -5,6 +5,12 @@ Class {
 	#package : 'Myg-Chess-Tests'
 }
 
+{ #category : 'asserting' }
+MyChessSquareTest >> assertPiece: aPiece square: aSquare render: aRender [
+
+	^ self assert: (aPiece renderPieceOn: aSquare) equals: aRender.
+]
+
 { #category : 'running' }
 MyChessSquareTest >> setUp [
 	super setUp.
@@ -50,7 +56,7 @@ MyChessSquareTest >> testShouldRenderBBishopWhenIsWhiteAndSquareIsWhite [
 	piece := MyBishop white.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderBishop: piece) equals: 'B'.
+	self assertPiece: piece square: square render: 'B'.
 ]
 
 { #category : 'renderKing' }
@@ -60,7 +66,7 @@ MyChessSquareTest >> testShouldRenderKKingWhenIsWhiteAndSquareIsWhite [
 	piece := MyKing white.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderKing: piece) equals: 'K'.
+	self assertPiece: piece square: square render: 'K'.
 ]
 
 { #category : 'renderKing' }
@@ -70,7 +76,7 @@ MyChessSquareTest >> testShouldRenderLKingWhenIsBlackAndSquareIsWhite [
 	piece := MyKing black.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderKing: piece) equals: 'L'.
+	self assertPiece: piece square: square render: 'L'.
 ]
 
 { #category : 'renderKnight' }
@@ -80,7 +86,7 @@ MyChessSquareTest >> testShouldRenderMKnightWhenIsBlackAndSquareIsWhite [
 	piece := MyKnight black.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderKnight: piece) equals: 'M'.
+	self assertPiece: piece square: square render: 'M'.
 ]
 
 { #category : 'renderKnight' }
@@ -90,7 +96,7 @@ MyChessSquareTest >> testShouldRenderNKnightWhenIsWhiteAndSquareIsWhite [
 	piece := MyKnight white.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderKnight: piece) equals: 'N'.
+	self assertPiece: piece square: square render: 'N'.
 ]
 
 { #category : 'renderPawn' }
@@ -100,7 +106,7 @@ MyChessSquareTest >> testShouldRenderOPawnWhenIsBlackAndSquareIsWhite [
 	piece := MyPawn black.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderPawn: piece) equals: 'O'.
+	self assertPiece: piece square: square render: 'O'.
 	
 ]
 
@@ -111,7 +117,7 @@ MyChessSquareTest >> testShouldRenderPPawnWhenIsWhiteAndSquareIsWhite [
 	piece := MyPawn white.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderPawn: piece) equals: 'P'.
+	self assertPiece: piece square: square render: 'P'.
 	
 ]
 
@@ -122,7 +128,7 @@ MyChessSquareTest >> testShouldRenderQQueenWhenIsWhiteAndSquareIsWhite [
 	piece := MyQueen white.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderQueen: piece) equals: 'Q'.
+	self assertPiece: piece square: square render: 'Q'.
 	
 ]
 
@@ -133,7 +139,7 @@ MyChessSquareTest >> testShouldRenderRRookWhenIsWhiteAndSquareIsWhite [
 	piece := MyRook white.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderRook: piece) equals: 'R'.
+	self assertPiece: piece square: square render: 'R'.
 	
 ]
 
@@ -144,7 +150,7 @@ MyChessSquareTest >> testShouldRenderTRookWhenIsBlackAndSquareIsWhite [
 	piece := MyRook black.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderRook: piece) equals: 'T'.
+	self assertPiece: piece square: square render: 'T'.
 	
 ]
 
@@ -155,7 +161,7 @@ MyChessSquareTest >> testShouldRenderVBishopWhenIsBlackAndSquareIsWhite [
 	piece := MyBishop black.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderBishop: piece) equals: 'V'.
+	self assertPiece: piece square: square render: 'V'.
 ]
 
 { #category : 'renderQueen' }
@@ -165,7 +171,7 @@ MyChessSquareTest >> testShouldRenderWQueenWhenIsBlackAndSquareIsWhite [
 	piece := MyQueen black.
 	square := MyWhiteChessSquare new.
 	
-	self assert: (square renderQueen: piece) equals: 'W'.
+	self assertPiece: piece square: square render: 'W'.
 	
 ]
 
@@ -176,7 +182,7 @@ MyChessSquareTest >> testShouldRenderbBishopWhenIsWhiteAndSquareIsBlack [
 	piece := MyBishop white.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderBishop: piece) equals: 'b'.
+	self assertPiece: piece square: square render: 'b'.
 ]
 
 { #category : 'renderKing' }
@@ -186,7 +192,7 @@ MyChessSquareTest >> testShouldRenderkKingWhenIsWhiteAndSquareIsBlack [
 	piece := MyKing white.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderKing: piece) equals: 'k'.
+	self assertPiece: piece square: square render: 'k'.
 ]
 
 { #category : 'renderKing' }
@@ -196,7 +202,7 @@ MyChessSquareTest >> testShouldRenderlKingWhenIsBlackAndSquareIsBlack [
 	piece := MyKing black.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderKing: piece) equals: 'l'.
+	self assertPiece: piece square: square render: 'l'.
 ]
 
 { #category : 'renderKnight' }
@@ -206,7 +212,7 @@ MyChessSquareTest >> testShouldRendermKnightWhenIsBlackAndSquareIsBlack [
 	piece := MyKnight black.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderKnight: piece) equals: 'm'.
+	self assertPiece: piece square: square render: 'm'.
 ]
 
 { #category : 'renderKnight' }
@@ -216,7 +222,7 @@ MyChessSquareTest >> testShouldRendernKnightWhenIsWhiteAndSquareIsBlack [
 	piece := MyKnight white.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderKnight: piece) equals: 'n'.
+	self assertPiece: piece square: square render: 'n'.
 ]
 
 { #category : 'renderPawn' }
@@ -226,7 +232,7 @@ MyChessSquareTest >> testShouldRenderoPawnWhenIsBlackAndSquareIsBlack [
 	piece := MyPawn black.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderPawn: piece) equals: 'o'.
+	self assertPiece: piece square: square render: 'o'.
 	
 ]
 
@@ -237,7 +243,7 @@ MyChessSquareTest >> testShouldRenderpPawnWhenIsWhiteAndSquareIsBlack [
 	piece := MyPawn white.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderPawn: piece) equals: 'p'.
+	self assertPiece: piece square: square render: 'p'.
 	
 ]
 
@@ -248,7 +254,7 @@ MyChessSquareTest >> testShouldRenderqQueenWhenIsWhiteAndSquareIsBlack [
 	piece := MyQueen white.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderQueen: piece) equals: 'q'.
+	self assertPiece: piece square: square render: 'q'.
 	
 ]
 
@@ -259,7 +265,7 @@ MyChessSquareTest >> testShouldRenderrRookWhenIsWhiteAndSquareIsBlack [
 	piece := MyRook white.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderRook: piece) equals: 'r'.
+	self assertPiece: piece square: square render: 'r'.
 	
 ]
 
@@ -270,7 +276,7 @@ MyChessSquareTest >> testShouldRendertRookWhenIsBlackAndSquareIsBlack [
 	piece := MyRook black.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderRook: piece) equals: 't'.
+	self assertPiece: piece square: square render: 't'.
 	
 ]
 
@@ -281,7 +287,7 @@ MyChessSquareTest >> testShouldRendervBishopWhenIsBlackAndSquareIsBlack [
 	piece := MyBishop black.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderBishop: piece) equals: 'v'.
+	self assertPiece: piece square: square render: 'v'.
 	
 ]
 
@@ -292,6 +298,6 @@ MyChessSquareTest >> testShouldRenderwQueenWhenIsBlackAndSquareIsBlack [
 	piece := MyQueen black.
 	square := MyBlackChessSquare new.
 	
-	self assert: (square renderQueen: piece) equals: 'w'.
+	self assertPiece: piece square: square render: 'w'.
 	
 ]

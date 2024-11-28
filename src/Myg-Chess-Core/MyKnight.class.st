@@ -14,7 +14,7 @@ MyKnight >> id [
 { #category : 'rendering' }
 MyKnight >> renderPieceOn: aSquare [
 
-	^ aSquare renderKnight: self
+	^ self pieceColor renderKnight: aSquare
 ]
 
 { #category : 'rendering' }
