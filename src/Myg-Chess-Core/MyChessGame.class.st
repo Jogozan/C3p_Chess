@@ -201,6 +201,11 @@ MyChessGame >> add [
 	^ self
 ]
 
+{ #category : 'accessing' }
+MyChessGame >> board [
+	^ board
+]
+
 { #category : 'actions' }
 MyChessGame >> cancel [
 	| textData |
