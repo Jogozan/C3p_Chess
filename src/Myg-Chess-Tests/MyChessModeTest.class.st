@@ -188,6 +188,24 @@ MyChessModeTest >> testDeleteMode [
 ]
 
 { #category : 'tests-switchMode' }
+MyChessModeTest >> testDeletePawnInA2 [
+
+	| game board a2 |
+	
+	game := MyChessGame freshGame.
+	board := game board.
+	a2 := board at: 'a2'.
+	
+	a2 contents isPawn.
+	game switchToDeleteMode.
+	board click: a2.
+	
+	self assert: a2 contents isNil
+	
+
+]
+
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testExitMode [
 
 	| game board mode |
