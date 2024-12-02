@@ -250,7 +250,7 @@ MyChessBoard >> pieces [
 { #category : 'event handling' }
 MyChessBoard >> readModeString [
 
-	^ game state
+	^ game stateString 
 ]
 
 { #category : 'accessing' }

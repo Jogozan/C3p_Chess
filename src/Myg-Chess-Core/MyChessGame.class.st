@@ -383,15 +383,15 @@ MyChessGame >> removePieceAt: square [
 ]
 
 { #category : 'accessing' }
-MyChessGame >> state [ 
-
-	^ state
-]
-
-{ #category : 'accessing' }
 MyChessGame >> state: aState [
 
 	state := aState
+]
+
+{ #category : 'accessing' }
+MyChessGame >> stateString [ 
+
+	^ state
 ]
 
 { #category : 'as yet unclassified' }
