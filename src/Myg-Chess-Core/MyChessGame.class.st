@@ -27,7 +27,8 @@ Class {
 		'moves',
 		'deleteMode',
 		'dsp',
-		'state'
+		'modeString',
+		'mode'
 	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
@@ -322,6 +323,12 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 		aLayoutConstraints vertical fitContent ]
 ]
 
+{ #category : 'accessing' }
+MyChessGame >> modeString [ 
+
+	^ modeString
+]
+
 { #category : 'public' }
 MyChessGame >> move: piece to: square [
 
@@ -385,13 +392,7 @@ MyChessGame >> removePieceAt: square [
 { #category : 'accessing' }
 MyChessGame >> state: aState [
 
-	state := aState
-]
-
-{ #category : 'accessing' }
-MyChessGame >> stateString [ 
-
-	^ state
+	modeString := aState
 ]
 
 { #category : 'as yet unclassified' }
@@ -502,5 +503,6 @@ MyChessGame >> switchToDeleteMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToMode: textData [
 
-	 state:= textData
+	mode := MyGameMode new.
+	modeString := textData
 ]

@@ -75,25 +75,25 @@ MyChessBoard >> click: aMyChessSquare [
 
 	word
 		caseOf: {
-				([ 'deleteOn' ] -> [ state delete: aMyChessSquare ]).
+				([ 'deleteOn' ] -> [ self state delete: aMyChessSquare ]).
 				([ 'addQbOn' ]
-				 -> [ state := state addQueenBlack: aMyChessSquare ]).
-				([ 'addPbOn' ] -> [ state := state addPawnBlack: aMyChessSquare ]).
-				([ 'addPwOn' ] -> [ state := state addPawnWhite: aMyChessSquare ]).
+				 -> [ state := self state addQueenBlack: aMyChessSquare ]).
+				([ 'addPbOn' ] -> [ state := self state addPawnBlack: aMyChessSquare ]).
+				([ 'addPwOn' ] -> [ state := self state addPawnWhite: aMyChessSquare ]).
 				([ 'addBbOn' ]
-				 -> [ state := state addBishopBlack: aMyChessSquare ]).
+				 -> [ state := self state addBishopBlack: aMyChessSquare ]).
 				([ 'addBwOn' ]
-				 -> [ state := state addBishopWhite: aMyChessSquare ]).
+				 -> [ state := self state addBishopWhite: aMyChessSquare ]).
 				([ 'addKwOn' ]
-				 -> [ state := state addKnightWhite: aMyChessSquare ]).
+				 -> [ state := self state addKnightWhite: aMyChessSquare ]).
 				([ 'addKbOn' ]
-				 -> [ state := state addKnightBlack: aMyChessSquare ]).
-				([ 'addRbOn' ] -> [ state := state addRookBlack: aMyChessSquare ]).
-				([ 'addRwOn' ] -> [ state := state addRookWhite: aMyChessSquare ]).
-				([ 'addKiwOn' ] -> [ state := state addKingWhite: aMyChessSquare ]).
-				([ 'addKibOn' ] -> [ state := state addKingBlack: aMyChessSquare ]).
-				([ 'addQwOn' ] -> [ state := state addQueenWhite: aMyChessSquare ]) }
-		otherwise: [ state := state clickOn: aMyChessSquare ]
+				 -> [ state := self state addKnightBlack: aMyChessSquare ]).
+				([ 'addRbOn' ] -> [ state := self state addRookBlack: aMyChessSquare ]).
+				([ 'addRwOn' ] -> [ state := self state addRookWhite: aMyChessSquare ]).
+				([ 'addKiwOn' ] -> [ state := self state addKingWhite: aMyChessSquare ]).
+				([ 'addKibOn' ] -> [ state := self state addKingBlack: aMyChessSquare ]).
+				([ 'addQwOn' ] -> [ state := self state addQueenWhite: aMyChessSquare ]) }
+		otherwise: [ state := self state clickOn: aMyChessSquare ]
 ]
 
 { #category : 'accessing' }
@@ -250,7 +250,7 @@ MyChessBoard >> pieces [
 { #category : 'event handling' }
 MyChessBoard >> readModeString [
 
-	^ game stateString 
+	^ game modeString 
 ]
 
 { #category : 'accessing' }
@@ -263,6 +263,18 @@ MyChessBoard >> select: aSquare [
 MyChessBoard >> selected: aMyChessSquare [ 
 	
 	selected := aMyChessSquare
+]
+
+{ #category : 'accessing' }
+MyChessBoard >> state [
+
+	^ state
+]
+
+{ #category : 'accessing' }
+MyChessBoard >> state: anObject [
+
+	^ state := anObject
 ]
 
 { #category : 'highlighting' }
