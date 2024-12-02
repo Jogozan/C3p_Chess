@@ -62,6 +62,34 @@ MyChessModeTest >> testAddKnightWhiteMode [
 ]
 
 { #category : 'tests' }
+MyChessModeTest >> testAddPawnBlackMode [
+
+	| game board mode |
+	
+	game := MyChessGame freshGame.
+	game switchToAddPawnBlackMode.
+	board := game board.
+
+	mode := board readMode.
+
+	self assert: mode equals: 'addPbOn'
+]
+
+{ #category : 'tests' }
+MyChessModeTest >> testAddPawnWhiteMode [
+
+	| game board mode |
+	
+	game := MyChessGame freshGame.
+	game switchToAddPawnWhiteMode.
+	board := game board.
+
+	mode := board readMode.
+
+	self assert: mode equals: 'addPwOn'
+]
+
+{ #category : 'tests' }
 MyChessModeTest >> testAddQueenBlackMode [
 
 	| game board mode |
