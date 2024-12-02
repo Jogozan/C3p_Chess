@@ -71,7 +71,7 @@ MyChessBoard >> blackColor: anObject [
 MyChessBoard >> click: aMyChessSquare [
 
 	| word |
-	word := self readMode.
+	word := self readModeString.
 
 	word
 		caseOf: {
@@ -248,11 +248,9 @@ MyChessBoard >> pieces [
 ]
 
 { #category : 'event handling' }
-MyChessBoard >> readMode [
+MyChessBoard >> readModeString [
 
-	| word |
-	word := game state.
-	^ word
+	^ game state
 ]
 
 { #category : 'accessing' }

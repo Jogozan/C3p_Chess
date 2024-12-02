@@ -14,7 +14,7 @@ MyChessModeTest >> testAddBishopBlackMode [
 	game switchToAddBishopBlackMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addBbOn'
 ]
@@ -28,7 +28,7 @@ MyChessModeTest >> testAddBishopWhiteMode [
 	game switchToAddBishopWhiteMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addBwOn'
 ]
@@ -42,7 +42,7 @@ MyChessModeTest >> testAddKingBlackMode [
 	game switchToAddKingBlackMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addKibOn'
 ]
@@ -56,7 +56,7 @@ MyChessModeTest >> testAddKingWhiteMode [
 	game switchToAddKingWhiteMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addKiwOn'
 ]
@@ -70,7 +70,7 @@ MyChessModeTest >> testAddKnightBlackMode [
 	game switchToAddKnightBlackMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addKbOn'
 ]
@@ -84,7 +84,7 @@ MyChessModeTest >> testAddKnightWhiteMode [
 	game switchToAddKnightWhiteMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addKwOn'
 ]
@@ -98,7 +98,7 @@ MyChessModeTest >> testAddPawnBlackMode [
 	game switchToAddPawnBlackMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addPbOn'
 ]
@@ -112,7 +112,7 @@ MyChessModeTest >> testAddPawnWhiteMode [
 	game switchToAddPawnWhiteMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addPwOn'
 ]
@@ -126,7 +126,7 @@ MyChessModeTest >> testAddQueenBlackMode [
 	game switchToAddQueenBlackMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addQbOn'
 ]
@@ -140,7 +140,7 @@ MyChessModeTest >> testAddQueenWhiteMode [
 	game switchToAddQueenWhiteMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addQwOn'
 ]
@@ -154,7 +154,7 @@ MyChessModeTest >> testAddRookBlackMode [
 	game switchToAddRookBlackMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addRbOn'
 ]
@@ -168,7 +168,7 @@ MyChessModeTest >> testAddRookWhiteMode [
 	game switchToAddRookWhiteMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'addRwOn'
 ]
@@ -182,7 +182,7 @@ MyChessModeTest >> testDeleteMode [
 	game switchToDeleteMode.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: 'deleteOn'
 ]
@@ -214,7 +214,7 @@ MyChessModeTest >> testExitMode [
 	game cancel.
 	board := game board.
 
-	mode := board readMode.
+	mode := board readModeString.
 
 	self assert: mode equals: ''
 ]
