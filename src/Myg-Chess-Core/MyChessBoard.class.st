@@ -70,35 +70,9 @@ MyChessBoard >> blackColor: anObject [
 { #category : 'event handling' }
 MyChessBoard >> click: aMyChessSquare [
 
-	self readModeString
-		caseOf: {
-				([ 'deleteOn' ] -> [ self state delete: aMyChessSquare ]).
-				([ 'addQbOn' ]
-				 -> [
-				 self state: (state := self state addQueenBlack: aMyChessSquare) ]).
-				([ 'addPbOn' ]
-				 -> [ self state: (self state addPawnBlack: aMyChessSquare) ]).
-				([ 'addPwOn' ]
-				 -> [ self state: (self state addPawnWhite: aMyChessSquare) ]).
-				([ 'addBbOn' ]
-				 -> [ self state: (state addBishopBlack: aMyChessSquare) ]).
-				([ 'addBwOn' ]
-				 -> [ self state: (self state addBishopWhite: aMyChessSquare) ]).
-				([ 'addKwOn' ]
-				 -> [ self state: (self state addKnightWhite: aMyChessSquare) ]).
-				([ 'addKbOn' ]
-				 -> [ self state: (self state addKnightBlack: aMyChessSquare) ]).
-				([ 'addRbOn' ]
-				 -> [ self state: (self state addRookBlack: aMyChessSquare) ]).
-				([ 'addRwOn' ]
-				 -> [ self state: (self state addRookWhite: aMyChessSquare) ]).
-				([ 'addKiwOn' ]
-				 -> [ self state: (self state addKingWhite: aMyChessSquare) ]).
-				([ 'addKibOn' ]
-				 -> [ self state: (self state addKingBlack: aMyChessSquare) ]).
-				([ 'addQwOn' ]
-				 -> [ self state: (self state addQueenWhite: aMyChessSquare) ]) }
-		otherwise: [ self state: (self state clickOn: aMyChessSquare) ]
+	game mode click: aMyChessSquare onBoard: self
+
+	
 ]
 
 { #category : 'accessing' }

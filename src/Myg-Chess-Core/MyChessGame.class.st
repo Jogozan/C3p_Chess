@@ -324,6 +324,11 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 ]
 
 { #category : 'accessing' }
+MyChessGame >> mode [
+	^ mode
+]
+
+{ #category : 'accessing' }
 MyChessGame >> modeString [ 
 
 	^ modeString
