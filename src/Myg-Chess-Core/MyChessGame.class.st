@@ -399,7 +399,7 @@ MyChessGame >> switchToAddBishopBlackMode [
 
 	| textData |
 	textData := 'addBbOn'.
-	self state: textData.
+	self switchToMode: textData.
 
 ]
 
@@ -408,7 +408,7 @@ MyChessGame >> switchToAddBishopWhiteMode [
 
 	| textData |
 	textData := 'addBwOn'.
-	self state: textData.
+	self switchToMode: textData.
 ]
 
 { #category : 'as yet unclassified' }
@@ -416,7 +416,7 @@ MyChessGame >> switchToAddKingBlackMode [
 
 	| textData |
 	textData := 'addKibOn'.
-	self state: textData.
+	self switchToMode: textData.
 ]
 
 { #category : 'as yet unclassified' }
@@ -424,7 +424,7 @@ MyChessGame >> switchToAddKingWhiteMode [
 
 	| textData |
 	textData := 'addKiwOn'.
-	self state: textData.
+	self switchToMode: textData.
 ]
 
 { #category : 'as yet unclassified' }
@@ -432,7 +432,7 @@ MyChessGame >> switchToAddKnightBlackMode [
 
 	| textData |
 	textData := 'addKbOn'.
-	self state: textData
+	self switchToMode: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -440,7 +440,7 @@ MyChessGame >> switchToAddKnightWhiteMode [
 
 	| textData |
 	textData := 'addKwOn'.
-	self state: textData
+	self switchToMode: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -448,7 +448,7 @@ MyChessGame >> switchToAddPawnBlackMode [
 
 	| textData |
 	textData := 'addPbOn'.
-	self state: textData
+	self switchToMode: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -456,7 +456,7 @@ MyChessGame >> switchToAddPawnWhiteMode [
 
 	| textData |
 	textData := 'addPwOn'.
-	self state: textData
+	self switchToMode: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -464,7 +464,7 @@ MyChessGame >> switchToAddQueenBlackMode [
 
 	| textData |
 	textData := 'addQbOn'.
-	self state: textData
+	self switchToMode: textData.
 ]
 
 { #category : 'as yet unclassified' }
@@ -472,7 +472,7 @@ MyChessGame >> switchToAddQueenWhiteMode [
 
 	| textData |
 	textData := 'addQwOn'.
-	self state: textData
+	self switchToMode: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -480,7 +480,7 @@ MyChessGame >> switchToAddRookBlackMode [
 
 	| textData |
 	textData := 'addRbOn'.
-	self state: textData
+	self switchToMode: textData
 ]
 
 { #category : 'as yet unclassified' }
@@ -496,7 +496,7 @@ MyChessGame >> switchToDeleteMode [
 
 	| textData |
 	textData := 'deleteOn'.
-	self state: textData
+	self switchToMode: textData.
 ]
 
 { #category : 'as yet unclassified' }
