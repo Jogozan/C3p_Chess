@@ -11,6 +11,12 @@ MyPawn >> id [
 	^ 'P'
 ]
 
+{ #category : 'accessing' }
+MyPawn >> isPawn [
+
+	^ true
+]
+
 { #category : 'rendering' }
 MyPawn >> renderPieceOn: aSquare [ 
 	

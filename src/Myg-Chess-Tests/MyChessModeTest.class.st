@@ -5,7 +5,7 @@ Class {
 	#package : 'Myg-Chess-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddBishopBlackMode [
 
 	| game board mode |
@@ -19,7 +19,7 @@ MyChessModeTest >> testAddBishopBlackMode [
 	self assert: mode equals: 'addBbOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddBishopWhiteMode [
 
 	| game board mode |
@@ -33,7 +33,7 @@ MyChessModeTest >> testAddBishopWhiteMode [
 	self assert: mode equals: 'addBwOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddKingBlackMode [
 
 	| game board mode |
@@ -47,7 +47,7 @@ MyChessModeTest >> testAddKingBlackMode [
 	self assert: mode equals: 'addKibOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddKingWhiteMode [
 
 	| game board mode |
@@ -61,7 +61,7 @@ MyChessModeTest >> testAddKingWhiteMode [
 	self assert: mode equals: 'addKiwOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddKnightBlackMode [
 
 	| game board mode |
@@ -75,7 +75,7 @@ MyChessModeTest >> testAddKnightBlackMode [
 	self assert: mode equals: 'addKbOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddKnightWhiteMode [
 
 	| game board mode |
@@ -89,7 +89,7 @@ MyChessModeTest >> testAddKnightWhiteMode [
 	self assert: mode equals: 'addKwOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddPawnBlackMode [
 
 	| game board mode |
@@ -103,7 +103,7 @@ MyChessModeTest >> testAddPawnBlackMode [
 	self assert: mode equals: 'addPbOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddPawnWhiteMode [
 
 	| game board mode |
@@ -117,7 +117,7 @@ MyChessModeTest >> testAddPawnWhiteMode [
 	self assert: mode equals: 'addPwOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddQueenBlackMode [
 
 	| game board mode |
@@ -131,7 +131,7 @@ MyChessModeTest >> testAddQueenBlackMode [
 	self assert: mode equals: 'addQbOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddQueenWhiteMode [
 
 	| game board mode |
@@ -145,7 +145,7 @@ MyChessModeTest >> testAddQueenWhiteMode [
 	self assert: mode equals: 'addQwOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddRookBlackMode [
 
 	| game board mode |
@@ -159,7 +159,7 @@ MyChessModeTest >> testAddRookBlackMode [
 	self assert: mode equals: 'addRbOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddRookWhiteMode [
 
 	| game board mode |
@@ -173,7 +173,7 @@ MyChessModeTest >> testAddRookWhiteMode [
 	self assert: mode equals: 'addRwOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testDeleteMode [
 
 	| game board mode |
@@ -187,7 +187,7 @@ MyChessModeTest >> testDeleteMode [
 	self assert: mode equals: 'deleteOn'
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testExitMode [
 
 	| game board mode |
