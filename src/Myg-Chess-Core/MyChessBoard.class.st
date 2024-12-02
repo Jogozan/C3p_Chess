@@ -71,7 +71,7 @@ MyChessBoard >> blackColor: anObject [
 MyChessBoard >> click: aMyChessSquare [
 
 	| word |
-	word := game state.
+	word := self readMode.
 
 	word
 		caseOf: {
@@ -92,7 +92,7 @@ MyChessBoard >> click: aMyChessSquare [
 				([ 'addRwOn' ] -> [ state := state addRookWhite: aMyChessSquare ]).
 				([ 'addKiwOn' ] -> [ state := state addKingWhite: aMyChessSquare ]).
 				([ 'addKibOn' ] -> [ state := state addKingBlack: aMyChessSquare ]).
-				([ 'addOn' ] -> [ state := state addQueenWhite: aMyChessSquare ])}
+				([ 'addOn' ] -> [ state := state addQueenWhite: aMyChessSquare ]) }
 		otherwise: [ state := state clickOn: aMyChessSquare ]
 ]
 
@@ -245,6 +245,14 @@ MyChessBoard >> initializeSquares [
 MyChessBoard >> pieces [
 	
 	^ children collect: [ :square | square contents ]
+]
+
+{ #category : 'event handling' }
+MyChessBoard >> readMode [
+
+	| word |
+	word := game state.
+	^ word
 ]
 
 { #category : 'accessing' }

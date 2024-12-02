@@ -8,10 +8,13 @@ Class {
 { #category : 'tests' }
 MyChessModeTest >> testDeleteMode [
 
-	| game board |
+	| game board mode |
+	
 	game := MyChessGame freshGame.
 	game switchToDeleteMode.
-	board := game state.
+	board := game board.
 
-	self assert: board equals: 'deleteOn'
+	mode := board readMode.
+
+	self assert: mode equals: 'deleteOn'
 ]
