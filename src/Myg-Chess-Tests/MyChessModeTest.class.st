@@ -186,3 +186,17 @@ MyChessModeTest >> testDeleteMode [
 
 	self assert: mode equals: 'deleteOn'
 ]
+
+{ #category : 'tests' }
+MyChessModeTest >> testExitMode [
+
+	| game board mode |
+	
+	game := MyChessGame freshGame.
+	game cancel.
+	board := game board.
+
+	mode := board readMode.
+
+	self assert: mode equals: ''
+]
