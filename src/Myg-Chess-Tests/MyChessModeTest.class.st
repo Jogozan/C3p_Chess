@@ -6,6 +6,20 @@ Class {
 }
 
 { #category : 'tests' }
+MyChessModeTest >> testAddRookWhiteMode [
+
+	| game board mode |
+	
+	game := MyChessGame freshGame.
+	game switchToAddRookWhiteMode.
+	board := game board.
+
+	mode := board readMode.
+
+	self assert: mode equals: 'addRwOn'
+]
+
+{ #category : 'tests' }
 MyChessModeTest >> testDeleteMode [
 
 	| game board mode |
