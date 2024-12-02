@@ -6,6 +6,34 @@ Class {
 }
 
 { #category : 'tests' }
+MyChessModeTest >> testAddBishopBlackMode [
+
+	| game board mode |
+	
+	game := MyChessGame freshGame.
+	game switchToAddBishopBlackMode.
+	board := game board.
+
+	mode := board readMode.
+
+	self assert: mode equals: 'addBbOn'
+]
+
+{ #category : 'tests' }
+MyChessModeTest >> testAddBishopWhiteMode [
+
+	| game board mode |
+	
+	game := MyChessGame freshGame.
+	game switchToAddBishopWhiteMode.
+	board := game board.
+
+	mode := board readMode.
+
+	self assert: mode equals: 'addBwOn'
+]
+
+{ #category : 'tests' }
 MyChessModeTest >> testAddRookBlackMode [
 
 	| game board mode |
