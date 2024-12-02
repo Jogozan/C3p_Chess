@@ -186,7 +186,7 @@ MyChessGame >> add [
 	editorPaneKing addChild: buttonKingW.
 
 	buttonQb whenClickedDo: [ self switchToAddQueenBlackMode ].
-	buttonQw whenClickedDo: [ self switchToAddMode ].
+	buttonQw whenClickedDo: [ self switchToAddQueenWhiteMode ].
 	buttonPb whenClickedDo: [ self switchToAddPawnBlackMode ].
 	buttonPw whenClickedDo: [ self switchToAddPawnWhiteMode ].
 	buttonBb whenClickedDo: [ self switchToAddBishopBlackMode ].
@@ -444,14 +444,6 @@ MyChessGame >> switchToAddKnightWhiteMode [
 ]
 
 { #category : 'as yet unclassified' }
-MyChessGame >> switchToAddMode [
-
-	| textData |
-	textData := 'addOn'.
-	self state: textData
-]
-
-{ #category : 'as yet unclassified' }
 MyChessGame >> switchToAddPawnBlackMode [
 
 	| textData |
@@ -471,7 +463,15 @@ MyChessGame >> switchToAddPawnWhiteMode [
 MyChessGame >> switchToAddQueenBlackMode [
 
 	| textData |
-	textData := 'addQueenBlackOn'.
+	textData := 'addQbOn'.
+	self state: textData
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToAddQueenWhiteMode [
+
+	| textData |
+	textData := 'addQwOn'.
 	self state: textData
 ]
 

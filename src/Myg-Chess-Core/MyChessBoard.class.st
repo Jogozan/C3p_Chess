@@ -76,7 +76,7 @@ MyChessBoard >> click: aMyChessSquare [
 	word
 		caseOf: {
 				([ 'deleteOn' ] -> [ state delete: aMyChessSquare ]).
-				([ 'addQueenBlackOn' ]
+				([ 'addQbOn' ]
 				 -> [ state := state addQueenBlack: aMyChessSquare ]).
 				([ 'addPbOn' ] -> [ state := state addPawnBlack: aMyChessSquare ]).
 				([ 'addPwOn' ] -> [ state := state addPawnWhite: aMyChessSquare ]).
@@ -92,7 +92,7 @@ MyChessBoard >> click: aMyChessSquare [
 				([ 'addRwOn' ] -> [ state := state addRookWhite: aMyChessSquare ]).
 				([ 'addKiwOn' ] -> [ state := state addKingWhite: aMyChessSquare ]).
 				([ 'addKibOn' ] -> [ state := state addKingBlack: aMyChessSquare ]).
-				([ 'addOn' ] -> [ state := state addQueenWhite: aMyChessSquare ]) }
+				([ 'addQwOn' ] -> [ state := state addQueenWhite: aMyChessSquare ]) }
 		otherwise: [ state := state clickOn: aMyChessSquare ]
 ]
 
