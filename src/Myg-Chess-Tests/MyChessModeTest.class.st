@@ -34,6 +34,34 @@ MyChessModeTest >> testAddBishopWhiteMode [
 ]
 
 { #category : 'tests' }
+MyChessModeTest >> testAddKnightBlackMode [
+
+	| game board mode |
+	
+	game := MyChessGame freshGame.
+	game switchToAddKnightBlackMode.
+	board := game board.
+
+	mode := board readMode.
+
+	self assert: mode equals: 'addKbOn'
+]
+
+{ #category : 'tests' }
+MyChessModeTest >> testAddKnightWhiteMode [
+
+	| game board mode |
+	
+	game := MyChessGame freshGame.
+	game switchToAddKnightWhiteMode.
+	board := game board.
+
+	mode := board readMode.
+
+	self assert: mode equals: 'addKwOn'
+]
+
+{ #category : 'tests' }
 MyChessModeTest >> testAddQueenBlackMode [
 
 	| game board mode |
