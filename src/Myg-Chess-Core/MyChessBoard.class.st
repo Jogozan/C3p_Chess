@@ -70,30 +70,35 @@ MyChessBoard >> blackColor: anObject [
 { #category : 'event handling' }
 MyChessBoard >> click: aMyChessSquare [
 
-	| word |
-	word := self readModeString.
-
-	word
+	self readModeString
 		caseOf: {
 				([ 'deleteOn' ] -> [ self state delete: aMyChessSquare ]).
 				([ 'addQbOn' ]
-				 -> [ state := self state addQueenBlack: aMyChessSquare ]).
-				([ 'addPbOn' ] -> [ state := self state addPawnBlack: aMyChessSquare ]).
-				([ 'addPwOn' ] -> [ state := self state addPawnWhite: aMyChessSquare ]).
+				 -> [
+				 self state: (state := self state addQueenBlack: aMyChessSquare) ]).
+				([ 'addPbOn' ]
+				 -> [ self state: (self state addPawnBlack: aMyChessSquare) ]).
+				([ 'addPwOn' ]
+				 -> [ self state: (self state addPawnWhite: aMyChessSquare) ]).
 				([ 'addBbOn' ]
-				 -> [ state := self state addBishopBlack: aMyChessSquare ]).
+				 -> [ self state: (state addBishopBlack: aMyChessSquare) ]).
 				([ 'addBwOn' ]
-				 -> [ state := self state addBishopWhite: aMyChessSquare ]).
+				 -> [ self state: (self state addBishopWhite: aMyChessSquare) ]).
 				([ 'addKwOn' ]
-				 -> [ state := self state addKnightWhite: aMyChessSquare ]).
+				 -> [ self state: (self state addKnightWhite: aMyChessSquare) ]).
 				([ 'addKbOn' ]
-				 -> [ state := self state addKnightBlack: aMyChessSquare ]).
-				([ 'addRbOn' ] -> [ state := self state addRookBlack: aMyChessSquare ]).
-				([ 'addRwOn' ] -> [ state := self state addRookWhite: aMyChessSquare ]).
-				([ 'addKiwOn' ] -> [ state := self state addKingWhite: aMyChessSquare ]).
-				([ 'addKibOn' ] -> [ state := self state addKingBlack: aMyChessSquare ]).
-				([ 'addQwOn' ] -> [ state := self state addQueenWhite: aMyChessSquare ]) }
-		otherwise: [ state := self state clickOn: aMyChessSquare ]
+				 -> [ self state: (self state addKnightBlack: aMyChessSquare) ]).
+				([ 'addRbOn' ]
+				 -> [ self state: (self state addRookBlack: aMyChessSquare) ]).
+				([ 'addRwOn' ]
+				 -> [ self state: (self state addRookWhite: aMyChessSquare) ]).
+				([ 'addKiwOn' ]
+				 -> [ self state: (self state addKingWhite: aMyChessSquare) ]).
+				([ 'addKibOn' ]
+				 -> [ self state: (self state addKingBlack: aMyChessSquare) ]).
+				([ 'addQwOn' ]
+				 -> [ self state: (self state addQueenWhite: aMyChessSquare) ]) }
+		otherwise: [ self state: (self state clickOn: aMyChessSquare) ]
 ]
 
 { #category : 'accessing' }
