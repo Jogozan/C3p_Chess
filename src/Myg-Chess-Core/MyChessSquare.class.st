@@ -64,6 +64,13 @@ MyChessSquare >> addContentQueen: aPiece [
 ]
 
 { #category : 'accessing' }
+MyChessSquare >> addPiece: aPiece [
+
+	contents := aPiece.
+	aPiece square: self
+]
+
+{ #category : 'accessing' }
 MyChessSquare >> board [
 	^ board
 ]
