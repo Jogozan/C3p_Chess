@@ -209,9 +209,8 @@ MyChessGame >> board [
 
 { #category : 'actions' }
 MyChessGame >> cancel [
-	| textData |
-	textData := ''.
-	self state: textData
+
+	self switchToExitMode
 ]
 
 { #category : 'playing' }
@@ -329,9 +328,9 @@ MyChessGame >> mode [
 ]
 
 { #category : 'accessing' }
-MyChessGame >> modeString [ 
+MyChessGame >> modeString [
 
-	^ modeString
+	^ mode modeString
 ]
 
 { #category : 'public' }
@@ -506,9 +505,20 @@ MyChessGame >> switchToDeleteMode [
 ]
 
 { #category : 'as yet unclassified' }
+MyChessGame >> switchToExitMode [
+
+	| textData |
+	textData := 'exitOn'.
+	self switchToMode: textData
+]
+
+{ #category : 'as yet unclassified' }
 MyChessGame >> switchToMode: textData [
 
-	self switchToMode: textData modeObject: MyGameMode new
+	| newMode |
+	newMode := MyGameMode new.
+	newMode modeString: textData.
+	self switchToMode: textData modeObject: newMode
 ]
 
 { #category : 'as yet unclassified' }

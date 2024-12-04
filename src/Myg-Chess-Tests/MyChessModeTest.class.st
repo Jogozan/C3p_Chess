@@ -232,5 +232,5 @@ MyChessModeTest >> testExitMode [
 
 	mode := board readModeString.
 
-	self assert: mode equals: ''
+	self assert: mode equals: 'exitOn'
 ]

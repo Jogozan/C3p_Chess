@@ -10,3 +10,8 @@ MyDeleteMode >> click: aMyChessSquare onBoard: aBoard [
 
 	aBoard state delete: aMyChessSquare
 ]
+
+{ #category : 'accessing' }
+MyDeleteMode >> modeString [
+	^ 'deleteOn'
+]

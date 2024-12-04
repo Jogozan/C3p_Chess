@@ -1,6 +1,9 @@
 Class {
 	#name : 'MyGameMode',
 	#superclass : 'Object',
+	#instVars : [
+		'modeString'
+	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
 }
@@ -8,7 +11,7 @@ Class {
 { #category : 'as yet unclassified' }
 MyGameMode >> click: aMyChessSquare onBoard: aBoard [
 
-	aBoard readModeString
+	modeString 
 		caseOf: {
 				([ 'addQbOn' ]
 				 -> [ aBoard state: (aBoard state addQueenBlack: aMyChessSquare) ]).
@@ -35,4 +38,16 @@ MyGameMode >> click: aMyChessSquare onBoard: aBoard [
 				([ 'addQwOn' ]
 				 -> [ aBoard state: (aBoard state addQueenWhite: aMyChessSquare) ]) }
 		otherwise: [ aBoard state: (aBoard state clickOn: aMyChessSquare) ]
+]
+
+{ #category : 'accessing' }
+MyGameMode >> modeString [
+
+	^ modeString
+]
+
+{ #category : 'accessing' }
+MyGameMode >> modeString: anObject [
+
+	modeString := anObject
 ]
