@@ -27,7 +27,6 @@ Class {
 		'moves',
 		'deleteMode',
 		'dsp',
-		'modeString',
 		'mode'
 	],
 	#category : 'Myg-Chess-Core',
@@ -524,7 +523,6 @@ MyChessGame >> switchToMode: textData [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToMode: textData modeObject: aModeObject [
 	
-	mode:= aModeObject.
-	modeString := textData 
+	mode:= aModeObject
 
 ]
