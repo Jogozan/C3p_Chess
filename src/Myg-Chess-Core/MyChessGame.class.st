@@ -520,10 +520,3 @@ MyChessGame >> switchToMode: textData [
 	newMode modeString: textData.
 	mode := newMode
 ]
-
-{ #category : 'as yet unclassified' }
-MyChessGame >> switchToMode: textData modeObject: aModeObject [
-	
-	mode:= aModeObject
-
-]
