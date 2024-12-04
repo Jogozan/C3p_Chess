@@ -498,8 +498,7 @@ MyChessGame >> switchToAddRookWhiteMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToDeleteMode [
 
-	| textData aModeObject |
-	textData := 'deleteOn'.
+	| aModeObject |
 	aModeObject := MyDeleteMode new.
 	mode := aModeObject
 ]
