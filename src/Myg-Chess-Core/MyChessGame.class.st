@@ -258,6 +258,7 @@ MyChessGame >> initialize [
 	super initialize.
 	self initializeFonts.
 
+	mode := MyPlayMode new.
 	moves := OrderedCollection new.
 	whitePlayer := MyPlayer new white game: self.
 	blackPlayer := MyPlayer new black game: self
@@ -498,9 +499,8 @@ MyChessGame >> switchToAddRookWhiteMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToDeleteMode [
 
-	| aModeObject |
-	aModeObject := MyDeleteMode new.
-	mode := aModeObject
+	mode := MyDeleteMode new.
+	
 ]
 
 { #category : 'as yet unclassified' }

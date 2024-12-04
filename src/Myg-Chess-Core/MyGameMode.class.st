@@ -11,7 +11,7 @@ Class {
 { #category : 'as yet unclassified' }
 MyGameMode >> click: aMyChessSquare onBoard: aBoard [
 
-	modeString 
+	modeString
 		caseOf: {
 				([ 'addQbOn' ]
 				 -> [ aBoard state: (aBoard state addQueenBlack: aMyChessSquare) ]).
