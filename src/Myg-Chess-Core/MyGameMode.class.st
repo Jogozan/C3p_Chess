@@ -20,7 +20,7 @@ MyGameMode >> click: aMyChessSquare onBoard: aBoard [
 				([ 'addPwOn' ]
 				 -> [ aBoard state: (aBoard state addPawnWhite: aMyChessSquare) ]).
 				([ 'addBbOn' ]
-				 -> [ aBoard state: (aBoard addBishopBlack: aMyChessSquare) ]).
+				 -> [ aBoard state: (aBoard state addBishopBlack: aMyChessSquare) ]).
 				([ 'addBwOn' ]
 				 -> [ aBoard state: (aBoard state addBishopWhite: aMyChessSquare) ]).
 				([ 'addKwOn' ]

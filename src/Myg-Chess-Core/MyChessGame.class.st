@@ -206,12 +206,6 @@ MyChessGame >> board [
 	^ board
 ]
 
-{ #category : 'actions' }
-MyChessGame >> cancel [
-
-	self switchToExitMode
-]
-
 { #category : 'playing' }
 MyChessGame >> checkForMate [
 
@@ -246,7 +240,7 @@ MyChessGame >> editor [
 	editorPane addChild: buttonCancel.
 
 	buttonDelete whenClickedDo: [ self switchToDeleteMode ].
-	buttonCancel whenClickedDo: [ self cancel ].
+	buttonCancel whenClickedDo: [ self switchToPlayMode ].
 	buttonAdd whenClickedDo: [ self add ].
 
 	^ self
@@ -393,12 +387,6 @@ MyChessGame >> removePieceAt: square [
     self at: square put: nil.
 ]
 
-{ #category : 'accessing' }
-MyChessGame >> state: aState [
-
-	modeString := aState
-]
-
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToAddBishopBlackMode [
 
@@ -504,18 +492,16 @@ MyChessGame >> switchToDeleteMode [
 ]
 
 { #category : 'as yet unclassified' }
-MyChessGame >> switchToExitMode [
-
-	| textData |
-	textData := 'exitOn'.
-	self switchToMode: textData
-]
-
-{ #category : 'as yet unclassified' }
 MyChessGame >> switchToMode: textData [
 
 	| newMode |
 	newMode := MyGameMode new.
 	newMode modeString: textData.
 	mode := newMode
+]
+
+{ #category : 'actions' }
+MyChessGame >> switchToPlayMode [
+
+	mode := MyPlayMode new
 ]

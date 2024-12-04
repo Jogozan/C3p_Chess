@@ -220,17 +220,3 @@ MyChessModeTest >> testDeletePawnInA2 [
 	
 
 ]
-
-{ #category : 'tests-switchMode' }
-MyChessModeTest >> testExitMode [
-
-	| game board mode |
-	
-	game := MyChessGame freshGame.
-	game cancel.
-	board := game board.
-
-	mode := board readModeString.
-
-	self assert: mode equals: 'exitOn'
-]
