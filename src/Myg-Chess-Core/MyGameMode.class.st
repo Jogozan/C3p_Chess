@@ -11,33 +11,24 @@ Class {
 { #category : 'as yet unclassified' }
 MyGameMode >> click: aMyChessSquare onBoard: aBoard [
 
-	modeString
-		caseOf: {
-				([ 'addQbOn' ]
-				 -> [ aBoard state: (aBoard state addQueenBlack: aMyChessSquare) ]).
-				([ 'addPbOn' ]
-				 -> [ aBoard state: (aBoard state addPawnBlack: aMyChessSquare) ]).
-				([ 'addPwOn' ]
-				 -> [ aBoard state: (aBoard state addPawnWhite: aMyChessSquare) ]).
-				([ 'addBbOn' ]
-				 -> [ aBoard state: (aBoard state addBishopBlack: aMyChessSquare) ]).
-				([ 'addBwOn' ]
-				 -> [ aBoard state: (aBoard state addBishopWhite: aMyChessSquare) ]).
-				([ 'addKwOn' ]
-				 -> [ aBoard state: (aBoard state addKnightWhite: aMyChessSquare) ]).
-				([ 'addKbOn' ]
-				 -> [ aBoard state: (aBoard state addKnightBlack: aMyChessSquare) ]).
-				([ 'addRbOn' ]
-				 -> [ aBoard state: (aBoard state addRookBlack: aMyChessSquare) ]).
-				([ 'addRwOn' ]
-				 -> [ aBoard state: (aBoard state addRookWhite: aMyChessSquare) ]).
-				([ 'addKiwOn' ]
-				 -> [ aBoard state: (aBoard state addKingWhite: aMyChessSquare) ]).
-				([ 'addKibOn' ]
-				 -> [ aBoard state: (aBoard state addKingBlack: aMyChessSquare) ]).
-				([ 'addQwOn' ]
-				 -> [ aBoard state: (aBoard state addQueenWhite: aMyChessSquare) ]) }
-		otherwise: [ self error: 'Unknown state!' ]
+	| pieceToAdd |
+	pieceToAdd := modeString
+		              caseOf: {
+				              ([ 'addQbOn' ] -> [ MyQueen black ]).
+				              ([ 'addPbOn' ] -> [ MyPawn black ]).
+				              ([ 'addPwOn' ] -> [ MyPawn white ]).
+				              ([ 'addBbOn' ] -> [ MyBishop black ]).
+				              ([ 'addBwOn' ] -> [ MyBishop white ]).
+				              ([ 'addKwOn' ] -> [ MyKnight white ]).
+				              ([ 'addKbOn' ] -> [ MyKnight black ]).
+				              ([ 'addRbOn' ] -> [ MyRook black ]).
+				              ([ 'addRwOn' ] -> [ MyRook white ]).
+				              ([ 'addKiwOn' ] -> [ MyKing white ]).
+				              ([ 'addKibOn' ] -> [ MyKing black ]).
+				              ([ 'addQwOn' ] -> [ MyQueen white ]) }
+		              otherwise: [ self error: 'Unknown state!' ].
+
+	aMyChessSquare addPiece: pieceToAdd
 ]
 
 { #category : 'accessing' }
