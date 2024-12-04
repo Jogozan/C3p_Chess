@@ -112,7 +112,7 @@ MyChessModeTest >> testAddPawnWhiteInA3 [
 	a3 := board at: 'a3'.
 
 	self assert: a3 contents isNil.
-	game switchToAddPawnWhiteMode.
+	board game switchToAddPawnWhiteMode.
 	board click: a3.
 
 	self assert: a3 contents isPawn
@@ -213,6 +213,7 @@ MyChessModeTest >> testDeletePawnInA2 [
 	
 	a2 contents isPawn.
 	game switchToDeleteMode.
+	
 	board click: a2.
 	
 	self assert: a2 contents isNil

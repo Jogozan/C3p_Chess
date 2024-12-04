@@ -502,15 +502,19 @@ MyChessGame >> switchToDeleteMode [
 
 	| textData |
 	textData := 'deleteOn'.
-	self switchToMode: textData.
+	self switchToMode: textData modeObject: MyDeleteMode new
 ]
 
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToMode: textData [
 
-	textData = 'deleteOn'
-		ifTrue: [ mode:= MyDeleteMode new ]
-		ifFalse: [ mode:= MyGameMode new ].
-	mode := MyGameMode new.
-	modeString := textData
+	self switchToMode: textData modeObject: MyGameMode new
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> switchToMode: textData modeObject: aModeObject [
+	
+	mode:= aModeObject.
+	modeString := textData 
+
 ]

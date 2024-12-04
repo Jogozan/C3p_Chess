@@ -71,8 +71,6 @@ MyChessBoard >> blackColor: anObject [
 MyChessBoard >> click: aMyChessSquare [
 
 	game mode click: aMyChessSquare onBoard: self
-
-	
 ]
 
 { #category : 'accessing' }

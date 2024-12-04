@@ -10,7 +10,6 @@ MyGameMode >> click: aMyChessSquare onBoard: aBoard [
 
 	aBoard readModeString
 		caseOf: {
-				([ 'deleteOn' ] -> [ aBoard state delete: aMyChessSquare ]).
 				([ 'addQbOn' ]
 				 -> [ aBoard state: (aBoard state addQueenBlack: aMyChessSquare) ]).
 				([ 'addPbOn' ]
