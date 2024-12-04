@@ -104,6 +104,21 @@ MyChessModeTest >> testAddPawnBlackMode [
 ]
 
 { #category : 'tests-switchMode' }
+MyChessModeTest >> testAddPawnWhiteInA3 [
+
+	| game board a3 |
+	game := MyChessGame freshGame.
+	board := game board.
+	a3 := board at: 'a3'.
+
+	self assert: a3 contents isNil.
+	game switchToAddPawnWhiteMode.
+	board click: a3.
+
+	self assert: a3 contents isPawn
+]
+
+{ #category : 'tests-switchMode' }
 MyChessModeTest >> testAddPawnWhiteMode [
 
 	| game board mode |

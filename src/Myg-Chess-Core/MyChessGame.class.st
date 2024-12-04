@@ -508,6 +508,9 @@ MyChessGame >> switchToDeleteMode [
 { #category : 'as yet unclassified' }
 MyChessGame >> switchToMode: textData [
 
+	textData = 'deleteOn'
+		ifTrue: [ mode:= MyDeleteMode new ]
+		ifFalse: [ mode:= MyGameMode new ].
 	mode := MyGameMode new.
 	modeString := textData
 ]
