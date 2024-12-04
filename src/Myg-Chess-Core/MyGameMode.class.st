@@ -37,7 +37,7 @@ MyGameMode >> click: aMyChessSquare onBoard: aBoard [
 				 -> [ aBoard state: (aBoard state addKingBlack: aMyChessSquare) ]).
 				([ 'addQwOn' ]
 				 -> [ aBoard state: (aBoard state addQueenWhite: aMyChessSquare) ]) }
-		otherwise: [ aBoard state: (aBoard state clickOn: aMyChessSquare) ]
+		otherwise: [ self error: 'Unknown state!' ]
 ]
 
 { #category : 'accessing' }
