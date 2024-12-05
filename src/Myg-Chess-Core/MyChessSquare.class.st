@@ -45,6 +45,31 @@ MyChessSquare >> + aPoint [
 ]
 
 { #category : 'accessing' }
+MyChessSquare >> addContentQueen: aPiece [
+
+	| text |
+	contents := aPiece.
+
+	text := contents
+		        ifNil: [
+			        color isBlack
+				        ifFalse: [ 'z' ]
+				        ifTrue: [ 'x' ] ]
+		        ifNotNil: [ contents renderPieceOn: MyQueen new ].
+	piece text: (text asRopedText
+			 fontSize: 48;
+			 foreground: self foreground;
+			 fontName: MyOpenChessDownloadedFont new familyName)
+]
+
+{ #category : 'accessing' }
+MyChessSquare >> addPiece: aPiece [
+
+	contents := aPiece.
+	aPiece square: self
+]
+
+{ #category : 'accessing' }
 MyChessSquare >> board [
 
 	^ board
@@ -131,8 +156,8 @@ MyChessSquare >> initialize [
 
 	super initialize.
 	target := BlElement new
-		  geometry: BlCircleGeometry new;
-		  background: (Color gray alpha: 0.3).
+		          geometry: BlCircleGeometry new;
+		          background: (Color gray alpha: 0.3).
 
 	self layout: BlFrameLayout new.
 
@@ -273,6 +298,12 @@ MyChessSquare >> right [
 MyChessSquare >> select [
 	
 	self border: Color green
+]
+
+{ #category : 'initialization' }
+MyChessSquare >> selectEditor [
+	
+	self border: Color red
 ]
 
 { #category : 'accessing' }

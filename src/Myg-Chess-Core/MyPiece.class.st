@@ -2,8 +2,9 @@ Class {
 	#name : 'MyPiece',
 	#superclass : 'Object',
 	#instVars : [
+		'pieceColor',
 		'square',
-		'pieceColor'
+		'game'
 	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
@@ -73,6 +74,12 @@ MyPiece >> color [
 	^ pieceColor color
 ]
 
+{ #category : 'path commands' }
+MyPiece >> deleteMyPiece [
+	"Deleting my piece"
+	square emptyContents
+]
+
 { #category : 'rendering' }
 MyPiece >> downFile [
 
@@ -119,9 +126,21 @@ MyPiece >> id [
 	^ 'Q'
 ]
 
+{ #category : 'initialization' }
+MyPiece >> initializeForGame: aGame [
+
+	game:= aGame "Stocke l'instance de MyChessGame"
+]
+
 { #category : 'testing' }
 MyPiece >> isKing [
 	
+	^ false
+]
+
+{ #category : 'testing' }
+MyPiece >> isPawn [
+
 	^ false
 ]
 
@@ -163,6 +182,12 @@ MyPiece >> moveTo: aSquare [
 	square emptyContents.
 	square := aSquare.
 	aSquare contents: self
+]
+
+{ #category : 'instance creation' }
+MyPiece >> newForGame: aGame [
+
+	^ self new initializeForGame: aGame
 ]
 
 { #category : 'accessing' }

@@ -68,9 +68,9 @@ MyChessBoard >> blackColor: anObject [
 ]
 
 { #category : 'event handling' }
-MyChessBoard >> click: aMyChessSquare [ 
-	
-	state := state clickOn: aMyChessSquare
+MyChessBoard >> click: aMyChessSquare [
+
+	game mode click: aMyChessSquare onBoard: self
 ]
 
 { #category : 'accessing' }
@@ -112,7 +112,8 @@ MyChessBoard >> initialize [
 		aLayoutConstraints horizontal fitContent.
 		aLayoutConstraints vertical fitContent ].
 
-	self initializeSquares
+	self initializeSquares.
+	"self initializePieces"
 ]
 
 { #category : 'initialization' }
@@ -221,6 +222,12 @@ MyChessBoard >> pieces [
 	^ children collect: [ :square | square contents ]
 ]
 
+{ #category : 'event handling' }
+MyChessBoard >> readModeString [
+
+	^ game modeString 
+]
+
 { #category : 'accessing' }
 MyChessBoard >> select: aSquare [ 
 	
@@ -233,17 +240,22 @@ MyChessBoard >> selected: aMyChessSquare [
 	selected := aMyChessSquare
 ]
 
+{ #category : 'accessing' }
+MyChessBoard >> state [
+
+	^ state
+]
+
+{ #category : 'accessing' }
+MyChessBoard >> state: anObject [
+
+	^ state := anObject
+]
+
 { #category : 'highlighting' }
 MyChessBoard >> unhighLightTargets: squares [
 
 	squares do: [ :sq | sq ifNotNil: #unhighlightTarget ]
-]
-
-{ #category : 'selection' }
-MyChessBoard >> unselectSelected [
-	
-	selected ifNil: [ ^ self ].
-	selected doUnselect
 ]
 
 { #category : 'accessing' }

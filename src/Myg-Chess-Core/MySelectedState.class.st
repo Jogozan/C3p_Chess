@@ -42,6 +42,12 @@ MySelectedState >> clickOn: aMyChessSquare [
 	^ MyUnselectedState board: board
 ]
 
+{ #category : 'events' }
+MySelectedState >> delete: aMyChessSquare [
+
+	^ aMyChessSquare emptyContents
+]
+
 { #category : 'accessing' }
 MySelectedState >> selection [
 
