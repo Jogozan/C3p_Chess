@@ -2,9 +2,8 @@ Class {
 	#name : 'MyPiece',
 	#superclass : 'Object',
 	#instVars : [
-		'color',
 		'square',
-		'game'
+		'pieceColor'
 	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
@@ -14,7 +13,7 @@ Class {
 MyPiece class >> black [
 
 	^ self new
-		  color: Color black;
+		  pieceColor: MyBlackColorPiece new;
 		  yourself
 ]
 
@@ -22,7 +21,7 @@ MyPiece class >> black [
 MyPiece class >> white [
 
 	^ self new
-		  color: Color white;
+		  pieceColor: MyWhiteColorPiece new;
 		  yourself
 ]
 
@@ -63,7 +62,7 @@ MyPiece >> collectSquares: collectBlock while: untilBlock [
 		whileTrue: [ targets add: next ].
 
 	"If we can it the next piece, then add it too"
-	(next notNil and: [ next contents color ~= color ]) ifTrue: [ targets add: next ].
+	(next notNil and: [ next contents color ~= self color ]) ifTrue: [ targets add: next ].
 
 	^ targets
 ]
@@ -71,13 +70,7 @@ MyPiece >> collectSquares: collectBlock while: untilBlock [
 { #category : 'accessing' }
 MyPiece >> color [
 
-	^ color
-]
-
-{ #category : 'accessing' }
-MyPiece >> color: aColor [
-
-	color := aColor
+	^ pieceColor color
 ]
 
 { #category : 'path commands' }
@@ -159,7 +152,7 @@ MyPiece >> isPiece [
 { #category : 'testing' }
 MyPiece >> isWhite [
 	
-	^ color isBlack not
+	^ self color isBlack not
 ]
 
 { #category : 'rendering' }
@@ -194,6 +187,18 @@ MyPiece >> moveTo: aSquare [
 MyPiece >> newForGame: aGame [
 
 	^ self new initializeForGame: aGame
+]
+
+{ #category : 'accessing' }
+MyPiece >> pieceColor [
+
+	^ pieceColor
+]
+
+{ #category : 'accessing' }
+MyPiece >> pieceColor: aPieceColor [
+
+	pieceColor := aPieceColor
 ]
 
 { #category : 'rendering' }

@@ -14,7 +14,7 @@ MyKnight >> id [
 { #category : 'rendering' }
 MyKnight >> renderPieceOn: aSquare [
 
-	^ aSquare renderKnight: self
+	^ self pieceColor renderKnight: aSquare
 ]
 
 { #category : 'rendering' }
@@ -30,5 +30,5 @@ MyKnight >> targetSquaresLegal: aBoolean [
 		  (square down ifNotNil: [ :p | p down ifNotNil: #left ]).
 		  (square down ifNotNil: [ :p | p down ifNotNil: #right ]) }
 		  select: [ :s |
-			  s notNil and: [ s hasPiece not or: [ s contents color ~= color ] ] ]
+			  s notNil and: [ s hasPiece not or: [ s contents color ~= self color ] ] ]
 ]
