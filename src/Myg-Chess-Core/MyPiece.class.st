@@ -2,8 +2,9 @@ Class {
 	#name : 'MyPiece',
 	#superclass : 'Object',
 	#instVars : [
+		'pieceColor',
 		'square',
-		'pieceColor'
+		'game'
 	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
