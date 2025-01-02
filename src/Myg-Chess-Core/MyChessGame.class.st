@@ -53,6 +53,7 @@ MyChessGame class >> new [
 	self error: 'Please use one of the other constructors'
 ]
 
+<<<<<<< HEAD
 { #category : 'template' }
 MyChessGame >> activity: piece to: square [
 
@@ -215,6 +216,8 @@ MyChessGame >> changePlayer [
 			currentPlayer := whitePlayer ]
 ]
 
+=======
+>>>>>>> parent of a256230 (moving some code to make it better )
 { #category : 'playing' }
 MyChessGame >> checkForMate [
 
@@ -368,7 +371,11 @@ MyChessGame >> play [
 
 	self initFile.
 	currentPlayer play.
-
+	currentPlayer = whitePlayer
+		ifTrue: [ currentPlayer := blackPlayer ]
+		ifFalse: [ 
+			moveCount := moveCount + 1.
+			currentPlayer := whitePlayer ].
 	self checkForMate
 ]
 
