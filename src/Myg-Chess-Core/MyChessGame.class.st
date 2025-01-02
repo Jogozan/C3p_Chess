@@ -523,7 +523,8 @@ MyChessGame >> switchToMode: textData [
 MyChessGame >> switchToPlayMode [
 
 	mode := MyPlayMode new
-  
+]
+		
 { #category : 'as yet unclassified' }
 MyChessGame >> showPromotionWindowFor: aPawn withOptions: options [
 
