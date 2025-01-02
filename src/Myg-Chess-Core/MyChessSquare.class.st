@@ -2,7 +2,6 @@ Class {
 	#name : 'MyChessSquare',
 	#superclass : 'BlElement',
 	#instVars : [
-		'color',
 		'name',
 		'label',
 		'piece',
@@ -46,7 +45,33 @@ MyChessSquare >> + aPoint [
 ]
 
 { #category : 'accessing' }
+MyChessSquare >> addContentQueen: aPiece [
+
+	| text |
+	contents := aPiece.
+
+	text := contents
+		        ifNil: [
+			        color isBlack
+				        ifFalse: [ 'z' ]
+				        ifTrue: [ 'x' ] ]
+		        ifNotNil: [ contents renderPieceOn: MyQueen new ].
+	piece text: (text asRopedText
+			 fontSize: 48;
+			 foreground: self foreground;
+			 fontName: MyOpenChessDownloadedFont new familyName)
+]
+
+{ #category : 'accessing' }
+MyChessSquare >> addPiece: aPiece [
+
+	contents := aPiece.
+	aPiece square: self
+]
+
+{ #category : 'accessing' }
 MyChessSquare >> board [
+
 	^ board
 ]
 
@@ -63,18 +88,6 @@ MyChessSquare >> click [
 ]
 
 { #category : 'accessing' }
-MyChessSquare >> color [
-
-	^ color
-]
-
-{ #category : 'accessing' }
-MyChessSquare >> color: anObject [
-
-	color := anObject
-]
-
-{ #category : 'accessing' }
 MyChessSquare >> column [
 	
 	^ name first
@@ -82,25 +95,24 @@ MyChessSquare >> column [
 
 { #category : 'accessing' }
 MyChessSquare >> contents [
+
 	^ contents
 ]
 
 { #category : 'accessing' }
 MyChessSquare >> contents: aPiece [
 
-	| text |
-	contents := aPiece.
+    | text |
+    contents := aPiece.
 
-	text := contents
-		        ifNil: [
-			        color isBlack
-				        ifFalse: [ 'z' ]
-				        ifTrue: [ 'x' ] ]
-		        ifNotNil: [ contents renderPieceOn: self ].
-	piece text: (text asRopedText
-			 fontSize: 48;
-			 foreground: self foreground;
-			 fontName: MyOpenChessDownloadedFont new familyName)
+    text := contents
+                ifNil: [ self renderOnColor ]
+                ifNotNil: [ contents renderPieceOn: self ].
+    piece text: (text asRopedText
+             fontSize: 48;
+             foreground: self foreground;
+             fontName: MyOpenChessDownloadedFont new familyName)
+
 ]
 
 { #category : 'api - configuration' }
@@ -124,9 +136,7 @@ MyChessSquare >> file [
 { #category : 'accessing' }
 MyChessSquare >> foreground [
 			
-	^ color isBlack
-		ifTrue: [ board blackColor ]
-		ifFalse: [ board whiteColor ]
+	self subclassResponsibility
 ]
 
 { #category : 'testing' }
@@ -146,8 +156,8 @@ MyChessSquare >> initialize [
 
 	super initialize.
 	target := BlElement new
-		  geometry: BlCircleGeometry new;
-		  background: (Color gray alpha: 0.3).
+		          geometry: BlCircleGeometry new;
+		          background: (Color gray alpha: 0.3).
 
 	self layout: BlFrameLayout new.
 
@@ -178,14 +188,16 @@ MyChessSquare >> left [
 
 { #category : 'accessing' }
 MyChessSquare >> name [
+
 	^ name
 ]
 
 { #category : 'accessing' }
-MyChessSquare >> name: aString [
+MyChessSquare >> name: aString [ 
 
-	name := aString.
-	label text: (name asRopedText foreground: color negated)
+    name := aString.
+    label text: (name asRopedText foreground: self textColor)
+
 ]
 
 { #category : 'printing' }
@@ -199,86 +211,81 @@ MyChessSquare >> printOn: aStream [
 ]
 
 { #category : 'rendering' }
-MyChessSquare >> renderBishop: aPiece [
+MyChessSquare >> renderBlackBishop [
 
-	^ aPiece isWhite
-		  ifTrue: [
-			  color isBlack
-				  ifFalse: [ 'B' ]
-				  ifTrue: [ 'b' ] ]
-		  ifFalse: [
-			  color isBlack
-				  ifFalse: [ 'V' ]
-				  ifTrue: [ 'v' ] ]
+	self subclassResponsibility
 ]
 
 { #category : 'rendering' }
-MyChessSquare >> renderKing: aPiece [
+MyChessSquare >> renderBlackKing [
 
-	^ aPiece isWhite
-		  ifFalse: [
-			  color isBlack
-				  ifFalse: [ 'L' ]
-				  ifTrue: [ 'l' ] ]
-		  ifTrue: [
-			  color isBlack
-				  ifFalse: [ 'K' ]
-				  ifTrue: [ 'k' ] ]
+	self subclassResponsibility
 ]
 
 { #category : 'rendering' }
-MyChessSquare >> renderKnight: aPiece [
+MyChessSquare >> renderBlackKnight [
 
-	^ aPiece isWhite
-		  ifFalse: [ color isBlack
-				  ifFalse: [ 'M' ]
-				  ifTrue: [ 'm' ] ]
-		  ifTrue: [
-			  color isBlack
-				  ifFalse: [ 'N' ]
-				  ifTrue: [ 'n' ] ]
+	self subclassResponsibility
 ]
 
 { #category : 'rendering' }
-MyChessSquare >> renderPawn: aPiece [
+MyChessSquare >> renderBlackPawn [
 
-	^ aPiece isWhite
-		  ifFalse: [
-			  color isBlack
-				  ifFalse: [ 'O' ]
-				  ifTrue: [ 'o' ] ]
-		  ifTrue: [
-			  color isBlack
-				  ifFalse: [ 'P' ]
-				  ifTrue: [ 'p' ] ]
+	self subclassResponsibility
 ]
 
 { #category : 'rendering' }
-MyChessSquare >> renderQueen: aPiece [
+MyChessSquare >> renderBlackQueen [
 
-	^ aPiece isWhite
-		  ifFalse: [
-			  color isBlack
-				  ifFalse: [ 'W' ]
-				  ifTrue: [ 'w' ] ]
-		  ifTrue: [
-			  color isBlack
-				  ifFalse: [ 'Q' ]
-				  ifTrue: [ 'q' ] ]
+	self subclassResponsibility
 ]
 
 { #category : 'rendering' }
-MyChessSquare >> renderRook: aPiece [
+MyChessSquare >> renderBlackRook [
 
-	^ aPiece isWhite
-		  ifFalse: [
-			  color isBlack
-				  ifFalse: [ 'T' ]
-				  ifTrue: [ 't' ] ]
-		  ifTrue: [
-			  color isBlack
-				  ifFalse: [ 'R' ]
-				  ifTrue: [ 'r' ] ]
+	self subclassResponsibility
+]
+
+{ #category : 'rendering' }
+MyChessSquare >> renderOnColor [ 
+ 
+	self subclassResponsibility
+]
+
+{ #category : 'rendering' }
+MyChessSquare >> renderWhiteBishop [
+
+	self subclassResponsibility
+]
+
+{ #category : 'rendering' }
+MyChessSquare >> renderWhiteKing [
+
+	self subclassResponsibility
+]
+
+{ #category : 'rendering' }
+MyChessSquare >> renderWhiteKnight [
+
+	self subclassResponsibility
+]
+
+{ #category : 'rendering' }
+MyChessSquare >> renderWhitePawn [
+
+	self subclassResponsibility
+]
+
+{ #category : 'rendering' }
+MyChessSquare >> renderWhiteQueen [
+
+	self subclassResponsibility
+]
+
+{ #category : 'rendering' }
+MyChessSquare >> renderWhiteRook [
+
+	self subclassResponsibility
 ]
 
 { #category : 'accessing' }
@@ -291,6 +298,20 @@ MyChessSquare >> right [
 MyChessSquare >> select [
 	
 	self border: Color green
+]
+
+{ #category : 'initialization' }
+MyChessSquare >> selectEditor [
+	
+	self border: Color red
+]
+
+{ #category : 'accessing' }
+MyChessSquare >> textColor [ 
+
+    self subclassResponsibility
+
+
 ]
 
 { #category : 'highlighting' }
