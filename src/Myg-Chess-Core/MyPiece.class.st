@@ -38,6 +38,11 @@ MyPiece >> board [
 	^ square board
 ]
 
+{ #category : 'testing' }
+MyPiece >> canPromote [
+	^ false
+]
+
 { #category : 'rendering' }
 MyPiece >> collectSquares: aBlock [
 
@@ -178,10 +183,19 @@ MyPiece >> legalTargetSquares [
 MyPiece >> moveTo: aSquare [
 
 	(self legalTargetSquares includes: aSquare) ifFalse: [ ^ self ].
-
 	square emptyContents.
 	square := aSquare.
-	aSquare contents: self
+	aSquare contents: self.
+	self promoteIfNeeded
+]
+
+{ #category : 'as yet unclassified' }
+MyPiece >> promoteIfNeeded [
+]
+
+{ #category : 'as yet unclassified' }
+MyPiece >> promoteWindow [ 
+	^ self
 ]
 
 { #category : 'instance creation' }
