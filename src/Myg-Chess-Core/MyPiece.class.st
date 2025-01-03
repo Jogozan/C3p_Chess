@@ -38,6 +38,11 @@ MyPiece >> board [
 	^ square board
 ]
 
+{ #category : 'testing' }
+MyPiece >> canPromote [ 
+	^false
+]
+
 { #category : 'rendering' }
 MyPiece >> collectSquares: aBlock [
 
@@ -181,7 +186,8 @@ MyPiece >> moveTo: aSquare [
 
 	square emptyContents.
 	square := aSquare.
-	aSquare contents: self
+	aSquare contents: self.
+	self promoteIfNeeded.
 ]
 
 { #category : 'instance creation' }
@@ -200,6 +206,11 @@ MyPiece >> pieceColor [
 MyPiece >> pieceColor: aPieceColor [
 
 	pieceColor := aPieceColor
+]
+
+{ #category : 'as yet unclassified' }
+MyPiece >> promoteIfNeeded [ 
+	
 ]
 
 { #category : 'rendering' }

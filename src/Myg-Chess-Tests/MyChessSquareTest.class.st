@@ -1,6 +1,12 @@
 Class {
 	#name : 'MyChessSquareTest',
 	#superclass : 'TestCase',
+	#instVars : [
+		'board',
+		'pawn',
+		'whitePawn',
+		'blackPawn'
+	],
 	#category : 'Myg-Chess-Tests',
 	#package : 'Myg-Chess-Tests'
 }
@@ -13,8 +19,12 @@ MyChessSquareTest >> assertPiece: aPiece square: aSquare render: aRender [
 
 { #category : 'running' }
 MyChessSquareTest >> setUp [
-	super setUp.
 
+	super setUp.
+	board := MyChessBoard empty.
+	board initialize.
+	whitePawn := MyPawn white.
+	blackPawn := MyPawn black
 	"Put here a common initialization logic for tests"
 ]
 
