@@ -206,11 +206,28 @@ MyChessGame >> board [
 	^ board
 ]
 
+{ #category : 'as yet unclassified' }
+MyChessGame >> changePlayer [
+
+	currentPlayer = whitePlayer
+		ifTrue: [ currentPlayer := blackPlayer ]
+		ifFalse: [
+			moveCount := moveCount + 1.
+			currentPlayer := whitePlayer ]
+]
+
 { #category : 'playing' }
 MyChessGame >> checkForMate [
 
 	whitePlayer king isCheckMated ifTrue: [ self halt: 'Black wins!' ].
 	blackPlayer king isCheckMated ifTrue: [ self halt: 'White wins!' ].
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> configurePromotionFor: aPawn [
+	aPawn onPromotionDo: [ :pawn :options |
+        self showPromotionWindowFor: pawn withOptions: options
+    ].
 ]
 
 { #category : 'delete' }
@@ -289,11 +306,14 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	board game: self.
 	button := ToButton new.
 	button labelText: 'Play!'.
+	button whenClickedDo: [ self play ].
 	buttonEditor := ToButton new.
 	buttonEditor labelText: 'Editor !'.
 
 	infoPane := ToElement new.
-	infoPane constraintsDo: [ :c | c vertical fitContent ].
+	infoPane constraintsDo: [ :c |
+		c vertical fitContent.
+		c horizontal matchParent ].
 	infoPane layout: BlLinearLayout vertical.
 	infoPane layout cellSpacing: 10.
 	infoPane margin: (BlInsets all: 20).
@@ -309,6 +329,10 @@ MyChessGame >> initializeFromFENGame: aFENGame [
 	infoPane addChild: buttonEditor.
 	button whenClickedDo: [ self play ].
 	buttonEditor whenClickedDo: [ self editor ].
+	
+	board pieces do: [ :p |
+		(p isKindOf: MyPawn) ifTrue: [
+			self configurePromotionFor: p ] ].
 
 	self layout: BlLinearLayout horizontal.
 	self constraintsDo: [ :aLayoutConstraints |
@@ -331,6 +355,7 @@ MyChessGame >> modeString [
 MyChessGame >> move: piece to: square [
 
 	piece moveTo: square.
+	self changePlayer.
 	self recordMovementOf: piece to: square.
 ]
 
@@ -345,11 +370,6 @@ MyChessGame >> play [
 
 	self initFile.
 	currentPlayer play.
-	currentPlayer = whitePlayer
-		ifTrue: [ currentPlayer := blackPlayer ]
-		ifFalse: [ 
-			moveCount := moveCount + 1.
-			currentPlayer := whitePlayer ].
 	self checkForMate
 ]
 
@@ -385,6 +405,25 @@ MyChessGame >> recordMovementOf: aPiece to: aSquare [
 MyChessGame >> removePieceAt: square [
     
     self at: square put: nil.
+]
+
+{ #category : 'as yet unclassified' }
+MyChessGame >> showPromotionWindowFor: aPawn withOptions: options [
+	| window pane |
+	pane := ToPane vertical.
+	window := BlSpace new.
+
+	options do: [ :option |
+		| button |
+		button := ToButton new.
+		button labelText: option name.
+		button whenClickedDo: [
+			aPawn promoteTo: option.
+			window close ].
+		pane addChild: button ].
+
+	window root addChild: pane.
+	window show
 ]
 
 { #category : 'as yet unclassified' }
