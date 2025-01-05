@@ -41,9 +41,9 @@ MyPawn >> isPawn [
 ]
 
 { #category : 'enumerating' }
-MyPawn >> onPromotionDo: aBlock [
+MyPawn >> onPromotionDo: arg1 [
 
-	promotionBlock := aBlock
+	promotionBlock := arg1
 ]
 
 { #category : 'as yet unclassified' }
@@ -55,6 +55,28 @@ MyPawn >> promoteIfNeeded [
 				MyKnight.
 				MyRook.
 				MyBishop } ]
+]
+
+{ #category : 'as yet unclassified' }
+MyPawn >> promoteIfNeededisAuto: bool [
+
+	self canPromote ifTrue: [
+		bool
+			ifTrue: [
+				| promotionOptions randomIndex |
+				promotionOptions := {
+					                    MyQueen.
+					                    MyKnight.
+					                    MyRook.
+					                    MyBishop }.
+				randomIndex := promotionOptions size atRandom.
+				self promoteTo: (promotionOptions at: randomIndex) ]
+			ifFalse: [
+				promotionBlock value: self value: {
+						MyQueen.
+						MyKnight.
+						MyRook.
+						MyBishop } ] ]
 ]
 
 { #category : 'as yet unclassified' }

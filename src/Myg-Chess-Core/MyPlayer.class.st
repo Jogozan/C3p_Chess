@@ -72,7 +72,7 @@ MyPlayer >> play [
 		pieces remove: piece.
 		legalMoves := piece legalTargetSquares.
 		legalMoves ifNotEmpty: [
-			game move: piece to: legalMoves atRandom.
+			game move: piece to: legalMoves atRandom isAuto: true.
 			^ self ] ].
 
 	self halt: 'NO MOVES AVAILABLE!'
