@@ -224,10 +224,10 @@ MyChessGame >> checkForMate [
 ]
 
 { #category : 'as yet unclassified' }
-MyChessGame >> configurePromotionFor: aPawn [
-	aPawn onPromotionDo: [ :pawn :options |
-        self showPromotionWindowFor: pawn withOptions: options
-    ].
+MyChessGame >> configurePromotionFor: arg1 [
+
+	arg1 onPromotionDo: [ :arg2 :arg3 |
+		self showPromotionWindowFor: arg2 withOptions: arg3 ]
 ]
 
 { #category : 'delete' }
@@ -359,6 +359,14 @@ MyChessGame >> move: piece to: square [
 	self recordMovementOf: piece to: square.
 ]
 
+{ #category : 'public' }
+MyChessGame >> move: piece to: square isAuto: bool [
+
+	piece moveTo: square isAuto:bool.
+	self changePlayer.
+	self recordMovementOf: piece to: square.
+]
+
 { #category : 'accessing' }
 MyChessGame >> pieces [
 
@@ -368,7 +376,7 @@ MyChessGame >> pieces [
 { #category : 'playing' }
 MyChessGame >> play [
 
-	self initFile.
+	"self initFile."
 	currentPlayer play.
 	self checkForMate
 ]

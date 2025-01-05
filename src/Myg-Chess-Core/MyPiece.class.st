@@ -190,6 +190,17 @@ MyPiece >> moveTo: aSquare [
 	self promoteIfNeeded.
 ]
 
+{ #category : 'path commands' }
+MyPiece >> moveTo: aSquare isAuto:bool [
+
+	(self legalTargetSquares includes: aSquare) ifFalse: [ ^ self ].
+
+	square emptyContents.
+	square := aSquare.
+	aSquare contents: self.
+	self promoteIfNeededisAuto: bool.
+]
+
 { #category : 'instance creation' }
 MyPiece >> newForGame: aGame [
 
@@ -210,6 +221,11 @@ MyPiece >> pieceColor: aPieceColor [
 
 { #category : 'as yet unclassified' }
 MyPiece >> promoteIfNeeded [ 
+	
+]
+
+{ #category : 'as yet unclassified' }
+MyPiece >> promoteIfNeededisAuto: bool [
 	
 ]
 
